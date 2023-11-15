@@ -1,0 +1,34 @@
+<div class="menu" [class.short]="!shortMenu">
+	<div class="toggleShort" (click)="toggleMenu()">
+		<div class="icon">
+			<img
+				src="assets/icon/show-navbar.svg"
+				alt="toggle show navbar"
+				class="toggleShort__icon-img"
+			/>
+		</div>
+
+		<span *ngIf="!shortMenu">Свернуть</span>
+	</div>
+	<nav class="nav">
+		<ul>
+			<ng-container *ngFor="let route of routes; first as isFirst">
+				<li [routerLink]="route.path" *ngIf="!isFirst">
+					<div class="icon">
+						<img
+							src="assets/icon/{{ route.path }}.svg"
+							alt="{{ route.path }}"
+						/>
+					</div>
+					<span *ngIf="!shortMenu">{{ route.title }}</span>
+				</li>
+			</ng-container>
+		</ul>
+	</nav>
+</div>
+<div class="wrapper">
+	<div class="toolbar">add</div>
+	<div class="content">
+		<ng-content></ng-content>
+	</div>
+</div>

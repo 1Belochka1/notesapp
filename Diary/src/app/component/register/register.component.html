@@ -1,0 +1,65 @@
+<form class="form scrollbar" [formGroup]="form" (ngSubmit)="register()">
+	<h2 class="title">Регистрация</h2>
+	<div class="fields">
+		<custom-input
+			placeholder="Логин"
+			title="Введите логин"
+			type="text"
+			[formControl]="this.form.controls.login"
+			name="login"
+			appLoginExistsValidator
+			class="column-1"
+		>
+		</custom-input>
+		<custom-input
+			placeholder="Пароль"
+			title="Введите пароль"
+			type="password"
+			[formControl]="this.form.controls.password"
+			name="password"
+			class="column-1"
+		>
+		</custom-input>
+		<custom-input
+			placeholder="Пароль"
+			title="Подтвердите пароль"
+			type="password"
+			[formControl]="this.form.controls.confirmPassword"
+			name="confirmPassword"
+			class="column-1"
+		>
+		</custom-input>
+		<custom-input
+			placeholder="Почта"
+			title="Введите почту"
+			type="text"
+			[formControl]="this.form.controls.email"
+			name="email"
+			class="column-2"
+		></custom-input>
+		<custom-input
+			placeholder="Имя"
+			title="Введите имя"
+			type="text"
+			[formControl]="this.form.controls.firstName"
+			name="firstName"
+			class="column-2"
+		></custom-input>
+		<custom-input
+			placeholder="Фамилия"
+			title="Введите фамилию"
+			type="text"
+			[formControl]="this.form.controls.lastName"
+			name="lastName"
+			class="column-2"
+		></custom-input>
+	</div>
+	<div class="buttons">
+		<button class="button" type="submit">Зарегистрироваться</button>
+		<div class="navigation">
+			<a routerLink="/authorization" class="navigation__link">
+				Есть аккаунт?
+			</a>
+		</div>
+	</div>
+</form>
