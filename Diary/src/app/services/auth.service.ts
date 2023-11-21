@@ -1,22 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IAuthenticationResponse } from '../models/authenticationResponse';
+import { appRoutes } from '../routes/appRoutes';
 import { apiUrls } from './api-urls';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthService {
-	private _loggedIn = new BehaviorSubject<boolean>(false);
-	private _userData = new BehaviorSubject<IAuthenticationResponse | null>(null);
+	private static _loggedIn = new BehaviorSubject<boolean>(false);
+	private static _userData = new BehaviorSubject<IAuthenticationResponse>({
+		id: '',
+		login: '',
+		token: '',
+	});
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private router: Router) {
 		// Проверяем, сохранены ли данные пользователя в cookie
 		const userData = this.getCookie('user');
 		if (userData) {
-			this._userData.next(JSON.parse(userData));
-			this._loggedIn.next(true);
+			AuthService._userData.next(JSON.parse(userData));
+			AuthService._loggedIn.next(true);
 		}
 	}
 
@@ -27,8 +33,8 @@ export class AuthService {
 				tap((user) => {
 					// Сохраняем данные пользователя в cookie
 					this.setCookie('user', JSON.stringify(user), 7);
-					this._userData.next(user);
-					this._loggedIn.next(true);
+					AuthService._userData.next(user);
+					AuthService._loggedIn.next(true);
 				})
 			);
 	}
@@ -40,8 +46,8 @@ export class AuthService {
 				tap((user) => {
 					// Сохраняем данные пользователя в cookie
 					this.setCookie('user', JSON.stringify(user), 7);
-					this._userData.next(user);
-					this._loggedIn.next(true);
+					AuthService._userData.next(user);
+					AuthService._loggedIn.next(true);
 				})
 			);
 	}
@@ -49,20 +55,25 @@ export class AuthService {
 	logout(): void {
 		// Удаляем данные пользователя из cookie
 		this.deleteCookie('user');
-		this._userData.next(null);
-		this._loggedIn.next(false);
+		AuthService._userData.next({ id: '', login: '', token: '' });
+		AuthService._loggedIn.next(false);
+		this.router.navigate([appRoutes.auth.path]);
 	}
 
-	isLoggedIn(): Observable<boolean> {
-		return this._loggedIn.asObservable();
+	isLoggedIn() {
+		return AuthService._loggedIn.asObservable();
 	}
 
-	getUserData(): Observable<any> {
-		return this._userData.asObservable();
+	getUserData() {
+		return AuthService._userData.asObservable();
 	}
 
-	getUserToken(): string | null {
-		return this._userData.getValue()?.Token ?? null;
+	getUserToken(): string {
+		return AuthService._userData.getValue().token;
+	}
+
+	getUserLogin(): string {
+		return AuthService._userData.getValue().id;
 	}
 
 	isLoginExist(login: string): Observable<boolean> {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EfCoreDialogsState">
+    <option name="keyValueStorage">
+      <map>
+        <entry key="Common:374ebeaf-a1ae-4687-aea5-8818e7034c8b:dbContext" value="Diary.Infrastructure.Persistence.DiaryDbContext" />
+        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:cda2ccda-ba40-4748-b1e6-2f05a3682752:dbContext" value="Diary.Infrastructure.Persistence.DiaryDbContext" />
+        <entry key="Common:noBuild" value="false" />
+        <entry key="Common:outputFolder" value="Migrations" />
+        <entry key="Common:useDefaultConnection" value="true" />
+      </map>
+    </option>
+  </component>
+</project>

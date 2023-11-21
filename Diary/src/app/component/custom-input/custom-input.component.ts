@@ -1,7 +1,7 @@
 import { Component, Directive, Input, OnInit, forwardRef } from '@angular/core';
 import {
+	AbstractControl,
 	ControlValueAccessor,
-	FormControl,
 	NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
@@ -19,7 +19,10 @@ import {
 })
 export class CustomInputComponent implements OnInit, ControlValueAccessor {
 	@Input()
-	formControl: FormControl;
+	form: AbstractControl;
+
+	@Input()
+	formControl: AbstractControl;
 
 	@Input()
 	directive: Directive;

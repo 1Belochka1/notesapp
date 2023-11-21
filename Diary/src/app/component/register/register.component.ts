@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginExistsValidatorDirective } from 'src/app/validators/login-exist.validator';
+import { passwordConfirmValidator } from 'src/app/validators/passwordConfirm.valodator';
 
 @Component({
 	selector: 'app-register',
@@ -63,6 +64,7 @@ export class RegisterComponent {
 			],
 		},
 		{
+			validators: [passwordConfirmValidator],
 			updateOn: 'blur',
 		}
 	);
@@ -76,6 +78,7 @@ export class RegisterComponent {
 
 	register() {
 		if (this.form.invalid) {
+			console.log(this.form);
 			return;
 		}
 

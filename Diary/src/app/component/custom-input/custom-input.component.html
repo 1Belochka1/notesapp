@@ -20,8 +20,13 @@
 </div>
 
 <!-- Errors -->
-<ng-container *ngIf="formControl && formControl.touched && formControl.errors">
-	<ng-container *ngIf="formControl.errors">
+<ng-container
+	*ngIf="
+		(formControl && formControl.touched && formControl.errors) ||
+		(form && form.touched && form.errors)
+	"
+>
+	<ng-container *ngIf="formControl.errors || form.errors">
 		<div class="error" *ngIf="formControl.hasError('required')">
 			Поле обязательно для заполнения
 		</div>
@@ -34,6 +39,9 @@
 			Максимальная длина
 			{{ formControl.getError("maxlength").requiredLength }}
 			символов
+		</div>
+		<div class="error" *ngIf="form && form.getError('noConfirmPassword')">
+			Пароли не совпадают
 		</div>
 	</ng-container>
 </ng-container>

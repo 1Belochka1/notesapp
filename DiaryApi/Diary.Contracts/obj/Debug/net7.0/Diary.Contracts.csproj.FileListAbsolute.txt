@@ -1,0 +1,12 @@
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\bin\Debug\net7.0\Diary.Contracts.deps.json
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\bin\Debug\net7.0\Diary.Contracts.dll
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\bin\Debug\net7.0\Diary.Contracts.pdb
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\Diary.Contracts.csproj.AssemblyReference.cache
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\Diary.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\Diary.Contracts.AssemblyInfoInputs.cache
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\Diary.Contracts.AssemblyInfo.cs
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\Diary.Contracts.csproj.CoreCompileInputs.cache
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\Diary.Contracts.dll
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\refint\Diary.Contracts.dll
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\Diary.Contracts.pdb
+D:\Проекты\PersonalDiary\DiaryApi\Diary.Contracts\obj\Debug\net7.0\ref\Diary.Contracts.dll

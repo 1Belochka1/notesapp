@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "rES1QRZdooRLrEs+/hpTC0Xk89dcGM0cnj8Zz5zhZ69ZnzQX52PukAJDGKntzXPtepEXUSlk711r4kDU9CJZJQ==",
+  "success": true,
+  "projectFilePath": "D:\\Проекты\\PersonalDiary\\app\\DiaryApi\\Diary.Application\\Diary.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\holog\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\holog\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\holog\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

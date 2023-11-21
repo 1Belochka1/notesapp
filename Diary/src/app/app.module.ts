@@ -7,9 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './component/auth/auth.component';
 import { CustomInputComponent } from './component/custom-input/custom-input.component';
-import { MainModule } from './component/main/main.module';
 import { RegisterComponent } from './component/register/register.component';
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { LoginExistsValidatorDirective } from './validators/login-exist.validator';
 
 @NgModule({
@@ -22,11 +21,10 @@ import { LoginExistsValidatorDirective } from './validators/login-exist.validato
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		MainModule,
 		ReactiveFormsModule,
 		HttpClientModule,
 	],
-	providers: [UserService, LoginExistsValidatorDirective],
+	providers: [AuthService, LoginExistsValidatorDirective],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

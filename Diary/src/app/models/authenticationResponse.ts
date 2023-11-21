@@ -1,5 +1,5 @@
 export interface IAuthenticationResponse {
-	Id: string;
-	Login: string;
-	Token: string;
+	id: string;
+	login: string;
+	token: string;
 }

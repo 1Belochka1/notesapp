@@ -1,9 +1,4 @@
 :host {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: space-between;
-
 	max-width: 540px;
 	max-height: 550px;
 	width: 100%;
@@ -13,11 +8,6 @@
 	border-radius: var(--border-radius);
 
 	background: var(--color-background-container);
-
-	@media (height < 624px) and (orientation: landscape) {
-		overflow-y: scroll;
-		gap: 20px;
-	}
 
 	@media (width < 1024px) {
 	}
@@ -36,44 +26,58 @@
 	}
 }
 
-:host,
-.btn,
-.field__input::placeholder {
-	text-transform: uppercase;
-}
-
-.title,
-.field,
-.buttons {
-	width: 100%;
-}
-
-.title {
-	font-size: 32px;
-	font-weight: 400;
-
-	text-align: center;
-
-	@media (width < 1024px) {
-	}
-
-	@media (width < 768px) {
-	}
-
-	@media (width< 425px) {
-		font-size: 24px;
-	}
-
-	@media (width < 320px) {
-	}
-}
-
-.fields {
+form {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-
+	justify-content: space-between;
 	width: 100%;
+	height: 100%;
 
-	gap: 25px;
+	@media (height < 624px) and (orientation: landscape) {
+		overflow-y: scroll;
+		gap: 20px;
+	}
+
+	form,
+	.btn,
+	.field__input::placeholder {
+		text-transform: uppercase;
+	}
+
+	.title,
+	.field,
+	.buttons {
+		width: 100%;
+	}
+
+	.title {
+		font-size: 32px;
+		font-weight: 400;
+
+		text-align: center;
+
+		@media (width < 1024px) {
+		}
+
+		@media (width < 768px) {
+		}
+
+		@media (width< 425px) {
+			font-size: 24px;
+		}
+
+		@media (width < 320px) {
+		}
+	}
+
+	.fields {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		width: 100%;
+
+		gap: 25px;
+	}
 }

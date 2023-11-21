@@ -1,0 +1,22 @@
+[*]
+
+# Standard properties
+max_line_length = 60
+
+# Microsoft .NET properties
+csharp_preferred_modifier_order = private, public, protected, internal, new, readonly, abstract, virtual, sealed, static, override, extern, unsafe, volatile, async
+dotnet_sort_system_directives_first = false
+
+# ReSharper properties
+resharper_blank_lines_after_control_transfer_statements = 1
+resharper_csharp_wrap_after_invocation_lpar = true
+resharper_csharp_wrap_arguments_style = chop_if_long
+resharper_csharp_wrap_before_declaration_lpar = false
+resharper_instance_members_qualify_declared_in =
+resharper_place_accessorholder_attribute_on_same_line = false
+resharper_place_expr_property_on_single_line = true
+resharper_place_field_attribute_on_same_line = if_owner_is_single_line
+resharper_place_simple_embedded_statement_on_same_line = true
+resharper_wrap_array_initializer_style = chop_if_long
+resharper_wrap_before_declaration_lpar = false
+resharper_wrap_chained_method_calls = chop_if_long

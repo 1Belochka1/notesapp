@@ -18,7 +18,6 @@ export const authGuard: CanActivateFn = (
 
 	return authService.isLoggedIn().pipe(
 		map((loggedIn) => {
-			console.log(loggedIn);
 			if (loggedIn) {
 				if (route.routeConfig?.path == appRoutes.main) {
 					return true;
