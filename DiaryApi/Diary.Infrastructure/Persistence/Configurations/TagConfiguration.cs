@@ -4,14 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Diary.Infrastructure.Persistence.Configurations;
 
-public class TagConfiguration : IEntityTypeConfiguration<Tags>
+public class
+	TagConfiguration : IEntityTypeConfiguration<Tags>
 {
 	public void Configure(EntityTypeBuilder<Tags> builder)
 	{
 		ConfigureTagsTable(builder);
 	}
 
-	private void ConfigureTagsTable(EntityTypeBuilder<Tags> builder)
+	private void ConfigureTagsTable(
+		EntityTypeBuilder<Tags> builder)
 	{
 		builder.ToTable("Tag");
 
@@ -24,5 +26,10 @@ public class TagConfiguration : IEntityTypeConfiguration<Tags>
 		builder.Property(t => t.Name)
 			.HasMaxLength(50)
 			.IsRequired();
+
+		builder.HasOne(t => t.User)
+			.WithMany(c => c.Tags)
+			.HasForeignKey(t => t.UserId)
+			.OnDelete(DeleteBehavior.Cascade);
 	}
 }

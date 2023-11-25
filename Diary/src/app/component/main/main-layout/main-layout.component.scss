@@ -75,7 +75,7 @@
 	}
 }
 
-.short {
+.unShort {
 	width: 200px;
 
 	> .toggleShort {
@@ -103,6 +103,7 @@
 		height: 100%;
 		border-radius: var(--border-radius);
 		border: 1px solid var(--background-content-border);
+		overflow-y: auto;
 	}
 }
 

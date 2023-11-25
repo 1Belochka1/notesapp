@@ -5,7 +5,8 @@ using MediatR;
 namespace Diary.Application.Note.Commands.Delete;
 
 public class
-	DeleteNoteCommandHandler : IRequestHandler<DeleteNoteCommand>
+	DeleteNoteCommandHandler : IRequestHandler<
+		DeleteNoteCommand, Notes>
 {
 	private readonly INoteRepository _noteRepository;
 
@@ -19,22 +20,19 @@ public class
 		_unitOfWork = unitOfWork;
 	}
 
-	public async Task Handle(
+	public async Task<Notes> Handle(
 		DeleteNoteCommand request,
 		CancellationToken cancellationToken)
 	{
-		var note = new Notes
-		{
-			Id = Guid.NewGuid(),
-			UserId = request.UserId,
-			Name = request.Note.Name,
-			Content = request.Note.Content,
-			CreateDate = request.Note.CreateDate
-		};
+		var note =
+			await _noteRepository.Delete(request.NoteId);
 
-		await _noteRepository.Add(note);
+		if (note is null)
+			throw new Exception("Заметки не существует");
 
 		await _unitOfWork.SaveChangesAsync(
 			cancellationToken);
+
+		return note;
 	}
 }

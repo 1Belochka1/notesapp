@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { mainRoutes } from 'src/app/routes/mainRoutes';
+import { menuRoutes } from './menuRoutes';
 
 @Component({
 	selector: 'app-main-layout',
@@ -9,7 +9,7 @@ import { mainRoutes } from 'src/app/routes/mainRoutes';
 export class MainLayoutComponent {
 	shortMenu: boolean = true;
 
-	routes = mainRoutes;
+	routes = menuRoutes;
 
 	toggleMenu() {
 		this.shortMenu = !this.shortMenu;

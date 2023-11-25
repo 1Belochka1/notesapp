@@ -1,4 +1,5 @@
 ﻿using Diary.Domain.User;
+using System.Text.Json.Serialization;
 
 namespace Diary.Domain.UserInfo;
 
@@ -14,5 +15,6 @@ public class UsersInfo
 
 	public string LastName { get; set; } = null!;
 
+	[JsonIgnore]
 	public virtual Users User { get; set; } = null!;
 }

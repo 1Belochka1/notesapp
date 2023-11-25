@@ -1,6 +1,9 @@
 ﻿using Diary.Application.Common.Note;
 using Diary.Application.Note.Commands.Create;
+using Diary.Application.Note.Commands.Delete;
+using Diary.Application.Note.Commands.Update;
 using Diary.Application.Note.Queries.GetAllByUserId;
+using Diary.Contracts.Note;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 
@@ -27,6 +30,35 @@ public class NotesHub : Hub
 
 		await Clients.User(userId)
 			.SendAsync("AddNote", response);
+	}
+
+	public async Task UpdateNote(
+		NoteUpdateRequest updateNote)
+	{
+		var userId = Context.UserIdentifier;
+
+		var command = new UpdateNoteCommand(
+			updateNote.NoteId,
+			updateNote.Name,
+			updateNote.Content);
+
+		var note = await _mediator.Send(command);
+
+		await Clients.User(userId)
+			.SendAsync("UpdateNote", note);
+	}
+
+	public async Task DeleteNote(string noteId)
+	{
+		var userId = Context.UserIdentifier;
+
+		var command =
+			new DeleteNoteCommand(Guid.Parse(noteId));
+
+		var note = await _mediator.Send(command);
+
+		await Clients.User(userId)
+			.SendAsync("DeleteNote", note);
 	}
 
 	public async Task GetNotes()

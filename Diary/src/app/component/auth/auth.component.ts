@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { appRoutes } from 'src/app/routes/appRoutes';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
 	templateUrl: './auth.component.html',
 	styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
+	loginSubscription: Subscription;
+
 	registerPath: string = `/${appRoutes.register.path}`;
 
 	form = this.formBuilder.group({
@@ -35,7 +38,7 @@ export class AuthComponent {
 		};
 
 		// Вызываем метод регистрации из authService
-		this.authService.login(request).subscribe({
+		this.loginSubscription = this.authService.login(request).subscribe({
 			next: () => {
 				this.router.navigate(['/']);
 			},
@@ -44,5 +47,9 @@ export class AuthComponent {
 				console.log(err);
 			},
 		});
+	}
+
+	ngOnDestroy(): void {
+		this.loginSubscription.unsubscribe();
 	}
 }

@@ -58,6 +58,13 @@ export class AuthService {
 		AuthService._userData.next({ id: '', login: '', token: '' });
 		AuthService._loggedIn.next(false);
 		this.router.navigate([appRoutes.auth.path]);
+		if ('caches' in window) {
+			caches.keys().then(function (cacheNames) {
+				cacheNames.forEach(function (cacheName) {
+					caches.delete(cacheName);
+				});
+			});
+		}
 	}
 
 	isLoggedIn() {

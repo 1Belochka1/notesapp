@@ -1,4 +1,4 @@
-<div class="menu" [class.short]="!shortMenu">
+<div class="menu" [class.unShort]="!shortMenu">
 	<div class="toggleShort" (click)="toggleMenu()">
 		<div class="icon">
 			<img
@@ -12,8 +12,8 @@
 	</div>
 	<nav class="nav">
 		<ul>
-			<ng-container *ngFor="let route of routes; first as isFirst">
-				<li [routerLink]="route.path" *ngIf="!isFirst">
+			<ng-container *ngFor="let route of routes">
+				<li [routerLink]="route.path">
 					<div class="icon">
 						<img
 							src="assets/icon/{{ route.path }}.svg"

@@ -33,6 +33,19 @@ public class NoteRepository : INoteRepository
 		return note;
 	}
 
+	public async Task<Notes?> Delete(Guid noteId)
+	{
+		var note =
+			await _dbContext.Notes.SingleOrDefaultAsync(
+				n => n.Id == noteId);
+
+		if (note is null) return null;
+
+		_dbContext.Notes.Remove(note);
+
+		return note;
+	}
+
 	public async Task<Notes?> GetById(Guid noteId)
 	{
 		return await _dbContext.Notes.SingleOrDefaultAsync(
@@ -42,7 +55,11 @@ public class NoteRepository : INoteRepository
 	public async Task<ICollection<Notes>?> GetAllByUser(
 		Guid userId)
 	{
-		return await _dbContext.Notes.Where(
+		return await _dbContext.Notes
+			.Include(
+				n => n.Tags)
+			.IgnoreAutoIncludes()
+			.Where(
 				n => n.UserId == userId)
 			.ToArrayAsync();
 	}

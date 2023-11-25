@@ -1,7 +1,10 @@
 <label [for]="name" *ngIf="title">{{ title }}</label>
 <input
 	[class.valid]="formControl && formControl.touched && !formControl.invalid"
-	[class.invalid]="formControl && formControl.touched && formControl.invalid"
+	[class.invalid]="
+		(formControl && formControl.touched && formControl.invalid) ||
+		(form && form.touched && form.errors)
+	"
 	[type]="type"
 	[placeholder]="placeholder"
 	[value]="value"

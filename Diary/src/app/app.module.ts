@@ -6,8 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './component/auth/auth.component';
-import { CustomInputComponent } from './component/custom-input/custom-input.component';
 import { RegisterComponent } from './component/register/register.component';
+import { CustomInputComponent } from './component/ui/custom-input/custom-input.component';
 import { AuthService } from './services/auth.service';
 import { LoginExistsValidatorDirective } from './validators/login-exist.validator';
 

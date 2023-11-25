@@ -61,7 +61,12 @@ namespace Diary.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tag", (string)null);
                 });
@@ -150,6 +155,17 @@ namespace Diary.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Diary.Domain.Tag.Tags", b =>
+                {
+                    b.HasOne("Diary.Domain.User.Users", "User")
+                        .WithMany("Tags")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Diary.Domain.UserInfo.UsersInfo", b =>
                 {
                     b.HasOne("Diary.Domain.User.Users", "User")
@@ -179,6 +195,8 @@ namespace Diary.Infrastructure.Migrations
             modelBuilder.Entity("Diary.Domain.User.Users", b =>
                 {
                     b.Navigation("Notes");
+
+                    b.Navigation("Tags");
 
                     b.Navigation("UserInfo");
                 });

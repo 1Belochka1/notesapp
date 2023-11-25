@@ -1,0 +1,23 @@
+:host {
+	position: relative;
+}
+input {
+	display: none;
+}
+label {
+	display: flex;
+	gap: 5px;
+	user-select: none;
+	cursor: pointer;
+}
+.dropdown-tags-img {
+	width: var(--width-icon-tags);
+}
+.tags-list {
+	position: absolute;
+	background-color: var(--color-background-container);
+	padding: 5px;
+	border: 1px solid var(--background-content-border);
+}
+.tags {
+}

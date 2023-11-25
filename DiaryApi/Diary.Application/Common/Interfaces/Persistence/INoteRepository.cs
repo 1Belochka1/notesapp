@@ -11,6 +11,9 @@ public interface INoteRepository
 		string? name,
 		string? content);
 
+	Task<Notes?> Delete(
+		Guid noteId);
+
 	Task<Notes?> GetById(Guid noteId);
 
 	Task<ICollection<Notes>?> GetAllByUser(Guid userId);

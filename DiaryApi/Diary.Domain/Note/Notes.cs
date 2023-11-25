@@ -17,5 +17,6 @@ public class Notes
 
 	public virtual Users User { get; set; } = null!;
 
-	public virtual ICollection<Tags> Tags { get; set; } = null!;
+	public virtual ICollection<Tags> Tags { get; set; } =
+		null!;
 }

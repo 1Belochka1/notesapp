@@ -63,6 +63,9 @@ public class NotesController : ApiController
 		var command = new CreateNoteCommand(
 			Guid.Parse(userId),
 			note);
+
+		var response = await _mediator.Send(command);
+
 		await _hubContext.Clients.User(userId)
 			.SendAsync("AddNote", note);
 		return Ok(note);
@@ -84,6 +87,9 @@ public class NotesController : ApiController
 			request.Content);
 
 		var note = await _mediator.Send(command);
+
+		await _hubContext.Clients.User(userId)
+			.SendAsync("UpdateNote", note);
 
 		return Ok(note);
 	}
