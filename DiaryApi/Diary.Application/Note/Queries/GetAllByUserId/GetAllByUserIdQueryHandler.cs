@@ -4,13 +4,13 @@ using MediatR;
 
 namespace Diary.Application.Note.Queries.GetAllByUserId;
 
-public class GetAllNotesByUserIdQueryHandler :
+public class GetAllByUserIdQueryHandler :
 	IRequestHandler<
 		GetAllByUserIdQuery, ICollection<Notes>>
 {
 	private readonly INoteRepository _noteRepository;
 
-	public GetAllNotesByUserIdQueryHandler(
+	public GetAllByUserIdQueryHandler(
 		INoteRepository noteRepository)
 	{
 		_noteRepository = noteRepository;

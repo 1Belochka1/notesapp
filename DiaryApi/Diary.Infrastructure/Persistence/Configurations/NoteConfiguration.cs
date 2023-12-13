@@ -24,7 +24,6 @@ public class
 			.ValueGeneratedNever();
 
 		builder.Property(n => n.Name)
-			.IsRequired()
 			.HasMaxLength(100);
 
 		builder.Property(n => n.Content)

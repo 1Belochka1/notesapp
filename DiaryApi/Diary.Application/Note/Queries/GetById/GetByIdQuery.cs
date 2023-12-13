@@ -1,6 +1,6 @@
-﻿namespace Diary.Application.Note.Queries.GetById;
+﻿using Diary.Domain.Note;
+using MediatR;
 
-public class GetByIdQuery
-{
-	
-}
+namespace Diary.Application.Note.Queries.GetById;
+
+public record GetByIdQuery(Guid NoteId) : IRequest<Notes?>;

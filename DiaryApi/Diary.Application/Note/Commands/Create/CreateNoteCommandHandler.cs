@@ -38,6 +38,6 @@ public class
 		await _unitOfWork.SaveChangesAsync(
 			cancellationToken);
 
-		return note;
+		return await _noteRepository.GetById(note.Id);
 	}
 }

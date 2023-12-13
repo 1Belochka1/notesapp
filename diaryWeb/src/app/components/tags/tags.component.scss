@@ -1,0 +1,37 @@
+.wrapper {
+  .tags-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+
+    .tag {
+      display: flex;
+      flex-direction: column;
+      padding: 7px;
+      border: 1px solid var(--color-tag-border);
+      gap: 5px;
+
+      &__name {
+        flex: 1;
+      }
+
+      &__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        border-collapse: collapse;
+        .buttons {
+          flex: 1;
+          padding: 5px;
+          color: var(--color-text);
+          background: var(--color-note-tools-background);
+          border: 1px solid var(--color-note-tools-border);
+          transition: background 0.45s ease;
+          &:hover {
+            background: var(--color-note-tools-background-hover);
+          }
+        }
+      }
+    }
+  }
+}

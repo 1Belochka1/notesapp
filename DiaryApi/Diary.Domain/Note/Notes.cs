@@ -7,7 +7,7 @@ public class Notes
 {
 	public Guid Id { get; set; } = Guid.NewGuid();
 
-	public string Name { get; set; } = null!;
+	public string? Name { get; set; }
 
 	public string Content { get; set; } = null!;
 

@@ -1,0 +1,39 @@
+.tags {
+  &__item {
+    display: flex;
+  }
+
+  .tag {
+    border: 1px solid var(--color-modal-input-border);
+
+    &__title {
+      flex: 1;
+
+      padding: 5px 10px;
+      transition: all 0.45s ease;
+      &:hover {
+        background: var(--color-modal-text-background);
+      }
+    }
+
+    &__delete {
+      padding: 5px 10px;
+
+      letter-spacing: -0.75px;
+
+      color: var(--color-modal-input-text);
+      transition: all 0.45s ease;
+      background: inherit;
+      &:hover {
+        background: var(--color-modal-text-background);
+      }
+    }
+  }
+}
+
+.zeroTags {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -2,10 +2,11 @@
 using Diary.Domain.Note;
 using MediatR;
 
-namespace Diary.Application.Note.Commands.AddTagByNoteId;
+namespace Diary.Application.Note.Commands.DeleteTagByNoteId;
 
-public class DeleteTagByNoteIdCommandHandler : IRequestHandler<
-	AddTagByNoteIdCommand, Notes?>
+public class DeleteTagByNoteIdCommandHandler :
+	IRequestHandler<
+		DeleteTagByNoteIdCommand, Notes?>
 {
 	private readonly INoteRepository _noteRepository;
 
@@ -20,11 +21,11 @@ public class DeleteTagByNoteIdCommandHandler : IRequestHandler<
 	}
 
 	public async Task<Notes?> Handle(
-		AddTagByNoteIdCommand request,
+		DeleteTagByNoteIdCommand request,
 		CancellationToken cancellationToken)
 	{
 		var note =
-			await _noteRepository.AddTagInNoteByNoteId(
+			await _noteRepository.DeleteTagInNoteByNoteId(
 				request.NoteId,
 				request.TagId);
 

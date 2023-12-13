@@ -1,3 +1,7 @@
-﻿namespace Diary.Application.Note.Commands.AddTagByNoteId;
+﻿using Diary.Domain.Note;
+using MediatR;
 
-public record AddTagByNoteIdCommand();
+namespace Diary.Application.Note.Commands.AddTagByNoteId;
+
+public record AddTagByNoteIdCommand
+	(Guid NoteId, Guid TagId) : IRequest<Notes?>;

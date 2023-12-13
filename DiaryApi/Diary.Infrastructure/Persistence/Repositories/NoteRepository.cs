@@ -8,7 +8,8 @@ public class NoteRepository : INoteRepository
 {
 	private readonly DiaryDbContext _dbContext;
 
-	public NoteRepository(DiaryDbContext dbContext)
+	public NoteRepository(
+		DiaryDbContext dbContext)
 	{
 		_dbContext = dbContext;
 	}
@@ -46,10 +47,26 @@ public class NoteRepository : INoteRepository
 		return note;
 	}
 
+	public async Task<ICollection<Notes>?>
+		GetAllNotesByTagId(Guid tagId)
+	{
+		var tag =
+			await _dbContext.Tags.SingleOrDefaultAsync(
+				t => t.Id == tagId);
+		if (tag is null) return null;
+
+		return
+			await _dbContext.Notes.Include(n => n.Tags)
+				.Where(n => n.Tags.Contains(tag))
+				.ToListAsync();
+	}
+
 	public async Task<Notes?> GetById(Guid noteId)
 	{
-		return await _dbContext.Notes.SingleOrDefaultAsync(
-			n => n.Id == noteId);
+		return await _dbContext.Notes
+			.Include(n => n.Tags)
+			.SingleOrDefaultAsync(
+				n => n.Id == noteId);
 	}
 
 	public async Task<ICollection<Notes>?> GetAllByUser(
@@ -62,5 +79,48 @@ public class NoteRepository : INoteRepository
 			.Where(
 				n => n.UserId == userId)
 			.ToArrayAsync();
+	}
+
+	public async Task<Notes?> AddTagInNoteByNoteId(
+		Guid noteId,
+		Guid tagId)
+	{
+		var note =
+			await _dbContext.Notes.Include(n => n.Tags)
+				.SingleOrDefaultAsync(
+					n => n.Id == noteId);
+
+		var tag =
+			await _dbContext.Tags.SingleOrDefaultAsync(
+				t => t.Id == tagId);
+
+		if (note is null || tag is null)
+			return null;
+
+		note.Tags.Add(tag);
+
+		return note;
+	}
+
+	public async Task<Notes?> DeleteTagInNoteByNoteId(
+		Guid noteId,
+		Guid tagId)
+	{
+		var note =
+			await _dbContext.Notes
+				.Include(n => n.Tags)
+				.SingleOrDefaultAsync(
+					n => n.Id == noteId);
+
+		var tag =
+			await _dbContext.Tags.SingleOrDefaultAsync(
+				t => t.Id == tagId);
+
+		if (note is null || tag is null)
+			return null;
+
+		note.Tags.Remove(tag);
+
+		return note;
 	}
 }

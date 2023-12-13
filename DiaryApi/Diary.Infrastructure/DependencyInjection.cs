@@ -45,6 +45,7 @@ public static class DependencyInjection
 				UserInfoRepository>();
 		services
 			.AddScoped<INoteRepository, NoteRepository>();
+		services.AddScoped<ITagRepository, TagRepository>();
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 		return services;
 	}
@@ -98,10 +99,18 @@ public static class DependencyInjection
 
 							var path = context.HttpContext
 								.Request.Path;
-							if (!string.IsNullOrEmpty(
-								    accessToken) &&
+							if ((!string.IsNullOrEmpty(
+								     accessToken) &&
+							     path.StartsWithSegments(
+								     "/notes")) ||
 							    path.StartsWithSegments(
-								    "/note"))
+								    "/noteEditor") ||
+							    path.StartsWithSegments(
+								    "/tags") ||
+							    path.StartsWithSegments(
+								    "/tag") ||
+							    path.StartsWithSegments(
+								    "/errors"))
 								context.Token = accessToken;
 
 							return Task.CompletedTask;

@@ -1,7 +1,7 @@
 ﻿using Diary.Domain.Note;
 using MediatR;
 
-namespace Diary.Application.Note.Commands.AddTagByNoteId;
+namespace Diary.Application.Note.Commands.DeleteTagByNoteId;
 
-public record AddTagByNoteIdCommand
+public record DeleteTagByNoteIdCommand
 	(Guid NoteId, Guid TagId) : IRequest<Notes?>;

@@ -1,3 +1,7 @@
-﻿namespace Diary.Application.Tag.Command.Update;
+﻿using Diary.Domain.Tag;
+using MediatR;
 
-public record UpdateTagCommand();
+namespace Diary.Application.Tag.Command.Update;
+
+public record UpdateTagCommand
+	(Guid TagId, string Name) : IRequest<Tags?>;

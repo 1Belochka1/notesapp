@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <form class="form" [formGroup]="form">
+    <h2 class="title">Регистрация</h2>
+    <div class="fields">
+      <custom-input
+        class="column-1"
+        type="text"
+        placeholder="Логин"
+        title="Введите логин"
+        [formControl]="this.form.controls.login"
+      ></custom-input>
+      <custom-input
+        class="column-1"
+        type="password"
+        placeholder="пароль"
+        title="Введите пароль"
+        [formControl]="this.form.controls.password"
+      ></custom-input>
+      <custom-input
+        class="column-1"
+        type="password"
+        name="confirmPassword"
+        placeholder="пароль"
+        title="Подтвердите пароль"
+        [formControl]="this.form.controls.confirmPassword"
+      ></custom-input>
+      <custom-input
+        class="column-2"
+        type="email"
+        placeholder="почта"
+        title="Введите почту"
+        [formControl]="this.form.controls.email"
+      ></custom-input>
+      <custom-input
+        class="column-2"
+        type="email"
+        placeholder="имя"
+        title="Введите имя"
+        [formControl]="this.form.controls.firstName"
+      ></custom-input>
+      <custom-input
+        class="column-2"
+        type="email"
+        placeholder="фамилия"
+        title="Введите фамилию"
+        [formControl]="this.form.controls.lastName"
+      ></custom-input>
+    </div>
+    <button type="submit" class="submitButton">Зарегистрироваться</button>
+    <a routerLink="/auth" class="">Авторизация</a>
+  </form>
+</div>

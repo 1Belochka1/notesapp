@@ -35,8 +35,12 @@ public static class DependencyInjection
 				hubOptionsDefault.ClientTimeoutInterval =
 					TimeSpan.FromMinutes(30);
 				hubOptionsDefault.StreamBufferCapacity =
-					30000;
+					int.MaxValue;
+				hubOptionsDefault
+						.MaximumReceiveMessageSize =
+					long.MaxValue;
 			});
+
 		services.AddCors();
 		return services;
 	}

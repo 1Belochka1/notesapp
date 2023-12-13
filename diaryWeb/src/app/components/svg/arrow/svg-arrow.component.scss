@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+}
+svg {
+  width: var(--width-svg);
+  stroke: var(--color-svg-stroke);
+  stroke-width: var(--width-svg-stroke);
+  transition: stroke 0.5s ease;
+}
+
+.hover {
+}
+
+.left {
+}
+.right {
+  transform: rotate(180deg);
+}
+.up {
+  transform: rotate(90deg);
+}
+.down {
+  transform: rotate(270deg);
+}

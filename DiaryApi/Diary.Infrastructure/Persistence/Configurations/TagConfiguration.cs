@@ -27,6 +27,9 @@ public class
 			.HasMaxLength(50)
 			.IsRequired();
 
+		builder.HasIndex(t => t.Name)
+			.IsUnique();
+
 		builder.HasOne(t => t.User)
 			.WithMany(c => c.Tags)
 			.HasForeignKey(t => t.UserId)

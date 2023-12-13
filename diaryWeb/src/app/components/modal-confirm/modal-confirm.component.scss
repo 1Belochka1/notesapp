@@ -1,0 +1,24 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  .title {
+    text-align: center;
+  }
+  .buttons {
+    display: flex;
+    > button {
+      flex: 1;
+      padding: 5px 10px;
+
+      transition: all 0.45s ease;
+      background: inherit;
+      color: var(--color-modal-text);
+      &:hover {
+        background: var(--color-modal-text-background);
+      }
+    }
+  }
+}

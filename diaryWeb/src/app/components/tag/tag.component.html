@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <ng-container *ngIf="notes">
+    <div
+      class="note"
+      *ngFor="let note of notes"
+      (click)="navigateToNote(note.id)"
+    >
+      <div class="note__name">{{ note.name }}</div>
+      <div class="note__content">{{ note.content | stripHtmlTags }}</div>
+      <div class="note__tags" *ngIf="note.tags.length > 0">
+        <svg-tags width="15px"></svg-tags>
+        <span class="note__tag">
+          {{ note.tags[0].name }}
+        </span>
+      </div>
+      <div class="note__createDate">
+        {{ note.createDate | date : "longDate" }}
+      </div>
+    </div>
+  </ng-container>
+</div>

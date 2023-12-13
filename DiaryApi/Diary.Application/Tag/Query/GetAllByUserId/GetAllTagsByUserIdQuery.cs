@@ -4,4 +4,6 @@ using MediatR;
 namespace Diary.Application.Tag.Query.GetAllByUserId;
 
 public record
-	GetAllTagsByUserId : IRequest<ICollection<Tags>>;
+	GetAllTagsByUserIdQuery
+	(Guid UserId, string? Search) : IRequest<
+		ICollection<Tags>?>;

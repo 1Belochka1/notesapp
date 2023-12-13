@@ -2,4 +2,4 @@
 
 public record CreateNote(
 	string Content,
-	string Name);
+	string? Name);

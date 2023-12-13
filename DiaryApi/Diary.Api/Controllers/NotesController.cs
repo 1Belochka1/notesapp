@@ -1,9 +1,8 @@
 ﻿using Diary.Api.Hubs;
 using Diary.Application.Common.Note;
 using Diary.Application.Note.Commands.Create;
-using Diary.Application.Note.Commands.Update;
 using Diary.Application.Note.Queries.GetAllByUserId;
-using Diary.Contracts.Note;
+using Diary.Application.Tag.Query.GetAllNotesByTagId;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,12 +26,6 @@ public class NotesController : ApiController
 		_hubContext = hubContext;
 	}
 
-	[HttpGet("getById/{id}")]
-	public async Task<IActionResult> GetById(Guid id)
-	{
-		return Ok();
-	}
-
 	[HttpGet("getAll")]
 	public async Task<IActionResult> GetAllByUser()
 	{
@@ -40,11 +33,25 @@ public class NotesController : ApiController
 			HttpContext.User.FindFirst(
 					ClaimTypes.NameIdentifier)
 				?.Value;
+
 		if (userId is null) return BadRequest();
 
 		var query =
-			new GetAllNotesByUserIdQuery(
+			new GetAllByUserIdQuery(
 				Guid.Parse(userId));
+
+		var notes = await _mediator.Send(query);
+
+		return Ok(notes);
+	}
+
+	[HttpGet("getAllByTagId/{tagId}")]
+	public async Task<IActionResult> GetAllByTagId(
+		string tagId)
+	{
+		var query =
+			new GetAllNotesByTagIdQuery(
+				Guid.Parse(tagId));
 
 		var notes = await _mediator.Send(query);
 
@@ -58,6 +65,7 @@ public class NotesController : ApiController
 			HttpContext.User.FindFirst(
 					ClaimTypes.NameIdentifier)
 				?.Value;
+
 		if (userId is null) return BadRequest();
 
 		var command = new CreateNoteCommand(
@@ -66,32 +74,7 @@ public class NotesController : ApiController
 
 		var response = await _mediator.Send(command);
 
-		await _hubContext.Clients.User(userId)
-			.SendAsync("AddNote", note);
-		return Ok(note);
-	}
-
-	[HttpPost("update")]
-	public async Task<IActionResult> Update(
-		NoteUpdateRequest request)
-	{
-		var userId =
-			HttpContext.User.FindFirst(
-					ClaimTypes.NameIdentifier)
-				?.Value;
-		if (userId is null) return BadRequest();
-
-		var command = new UpdateNoteCommand(
-			request.NoteId,
-			request.Name,
-			request.Content);
-
-		var note = await _mediator.Send(command);
-
-		await _hubContext.Clients.User(userId)
-			.SendAsync("UpdateNote", note);
-
-		return Ok(note);
+		return Ok(response);
 	}
 
 	// public async Task<IActionResult> Delete()

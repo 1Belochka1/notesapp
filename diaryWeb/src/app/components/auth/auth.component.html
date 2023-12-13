@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <form class="form" [formGroup]="form" (ngSubmit)="login()">
+    <h2 class="title">Авторизация</h2>
+    <div class="fields">
+      <custom-input
+        type="text"
+        placeholder="Логин"
+        title="Введите логин"
+        [formControl]="form.controls.login"
+      ></custom-input>
+      <custom-input
+        type="password"
+        placeholder="Пароль"
+        title="Введите пароль"
+        [formControl]="form.controls.password"
+      >
+      </custom-input>
+    </div>
+    <button type="submit" class="submitButton">Войти</button>
+    <a routerLink="/register" class="registerLink">Регистрация</a>
+  </form>
+</div>

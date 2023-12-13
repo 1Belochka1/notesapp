@@ -1,3 +1,7 @@
-﻿namespace Diary.Application.Tag.Command.Delete;
+﻿using Diary.Domain.Tag;
+using MediatR;
 
-public record DeleteTagCommand();
+namespace Diary.Application.Tag.Command.Delete;
+
+public record DeleteTagCommand
+	(Guid TagId) : IRequest<Tags?>;

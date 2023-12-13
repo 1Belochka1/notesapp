@@ -1,7 +1,7 @@
 ﻿using Diary.Domain.Note;
 using MediatR;
 
-namespace Diary.Application.Note.Queries.GetAllByUserId;
+namespace Diary.Application.Tag.Query.GetAllNotesByTagId;
 
-public record GetAllByTagIdQuery
+public record GetAllNotesByTagIdQuery
 	(Guid TagId) : IRequest<ICollection<Notes>>;

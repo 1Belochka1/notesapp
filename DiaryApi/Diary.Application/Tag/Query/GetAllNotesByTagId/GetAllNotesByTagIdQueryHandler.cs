@@ -1,17 +1,16 @@
 ﻿using Diary.Application.Common.Interfaces.Persistence;
-using Diary.Application.Note.Queries.GetAllByUserId;
 using Diary.Domain.Note;
 using MediatR;
 
-namespace Diary.Application.Note.Queries.GetAllNotesByTagId;
+namespace Diary.Application.Tag.Query.GetAllNotesByTagId;
 
-public class GetAllByTagIdQueryHandler :
+public class GetAllNotesByTagIdQueryHandler :
 	IRequestHandler<
 		GetAllNotesByTagIdQuery, ICollection<Notes>>
 {
 	private readonly INoteRepository _noteRepository;
 
-	public GetAllByTagIdQueryHandler(
+	public GetAllNotesByTagIdQueryHandler(
 		INoteRepository noteRepository)
 	{
 		_noteRepository = noteRepository;

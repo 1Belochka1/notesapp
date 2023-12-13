@@ -6,11 +6,13 @@ public interface ITagRepository
 {
 	Task Add(Tags tags);
 
-	Task Update(Guid tagId);
+	Task<Tags?> Update(Guid tagId, string name);
 
-	Task Delete(Guid tagId);
+	Task<Tags?> Delete(Guid tagId);
 
-	Task<ICollection<Tags>?> GetAllByNoteId(Guid noteId);
+	Task<Tags?> GetById(Guid tagId);
 
-	Task<ICollection<Tags>?> GetAllByUserId(Guid userId);
+	Task<ICollection<Tags>?> GetAllByUserId(
+		Guid userId,
+		string? search);
 }

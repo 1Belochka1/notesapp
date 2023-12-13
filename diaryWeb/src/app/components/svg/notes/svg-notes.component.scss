@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+}
+svg {
+  width: var(--width-svg);
+  stroke: var(--color-svg-stroke);
+  stroke-width: var(--width-svg-stroke);
+  transition: stroke 0.5s ease;
+}

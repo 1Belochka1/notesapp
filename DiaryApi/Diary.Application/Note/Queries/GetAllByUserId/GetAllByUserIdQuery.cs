@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Diary.Application.Note.Queries.GetAllByUserId;
 
-public record GetAllNotesByUserIdQuery
+public record GetAllByUserIdQuery
 	(Guid UserId) : IRequest<ICollection<Notes>>;

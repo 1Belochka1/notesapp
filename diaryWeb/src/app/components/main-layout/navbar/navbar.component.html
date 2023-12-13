@@ -1,0 +1,12 @@
+<div class="navbar__shortToggle" (click)="isNavbarShort = !isNavbarShort">
+  <svg-arrow [rotate]="isNavbarShort ? 'right' : 'left'"></svg-arrow>
+  <div class="title" *ngIf="!isNavbarShort">Свернуть</div>
+</div>
+<ul class="navbar__list">
+  <li class="navbar__item" *ngFor="let navbarItem of navbarData">
+    <a class="navbar__link" [routerLink]="navbarItem.routerLink">
+      <ng-container *ngComponentOutlet="navbarItem.svg"></ng-container>
+      <div class="title" *ngIf="!isNavbarShort">{{ navbarItem.title }}</div>
+    </a>
+  </li>
+</ul>

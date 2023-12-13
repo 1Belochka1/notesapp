@@ -18,10 +18,7 @@
 
     <ItemGroup>
         <Folder Include="Note\Common\"/>
-        <Folder Include="Note\Queries\GetById\"/>
-        <Folder Include="Tag\Command\"/>
         <Folder Include="Tag\Common\"/>
-        <Folder Include="Tag\Query\"/>
         <Folder Include="User\Commands\"/>
         <Folder Include="User\Common\"/>
     </ItemGroup>

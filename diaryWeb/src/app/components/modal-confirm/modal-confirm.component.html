@@ -1,0 +1,9 @@
+<app-modal-layout (click)="clickLayout($event)">
+  <div class="container">
+    <div class="title">{{ header }}</div>
+    <div class="buttons">
+      <button (click)="confirmClick()">Да</button>
+      <button (click)="cancelClick()">Нет</button>
+    </div>
+  </div>
+</app-modal-layout>

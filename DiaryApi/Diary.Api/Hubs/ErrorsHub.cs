@@ -1,6 +1,7 @@
-﻿namespace Diary.Api.Hubs;
+﻿using Microsoft.AspNetCore.SignalR;
 
-public class ErrorsHub
+namespace Diary.Api.Hubs;
+
+public class ErrorsHub : Hub
 {
-	
 }
