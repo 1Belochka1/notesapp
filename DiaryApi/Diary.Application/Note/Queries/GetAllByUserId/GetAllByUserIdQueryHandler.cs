@@ -6,7 +6,7 @@ namespace Diary.Application.Note.Queries.GetAllByUserId;
 
 public class GetAllNotesByUserIdQueryHandler :
 	IRequestHandler<
-		GetAllNotesByUserIdQuery, ICollection<Notes>>
+		GetAllByUserIdQuery, ICollection<Notes>>
 {
 	private readonly INoteRepository _noteRepository;
 
@@ -17,7 +17,7 @@ public class GetAllNotesByUserIdQueryHandler :
 	}
 
 	public async Task<ICollection<Notes>> Handle(
-		GetAllNotesByUserIdQuery request,
+		GetAllByUserIdQuery request,
 		CancellationToken cancellationToken)
 	{
 		return await _noteRepository.GetAllByUser(
