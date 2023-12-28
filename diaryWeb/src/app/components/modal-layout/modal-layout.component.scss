@@ -1,36 +1,37 @@
 :host {
-  display: flex;
-  justify-content: center;
-
-  position: absolute;
-  inset: 0;
-  background: var(--color-modal-background);
-  color: var(--color-modal-text);
-  padding: 20px 10px;
-  user-select: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	inset: 0;
+	background: var(--color-modal-background);
+	color: var(--color-modal-text);
+	padding: 20px 10px;
+	user-select: none;
+	z-index: 1000;
 }
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  width: 350px;
-  padding: 10px;
-  border: 1px solid var(--color-modal-wrapper-border);
-  background: var(--color-modal-wrapper-background);
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	width: 350px;
+	padding: 10px;
+	// border: 1px solid var(--color-modal-wrapper-border);
+	background: var(--color-modal-wrapper-background);
 
-  gap: 5px;
+	gap: 5px;
 
-  @media (width < 1024px) {
-  }
+	@media (width < 1024px) {
+	}
 
-  @media (width < 768px) {
-    width: 250px;
-  }
+	@media (width < 768px) {
+		width: 250px;
+	}
 
-  @media (width< 425px) {
-    width: 200px;
-  }
+	@media (width< 425px) {
+		width: 200px;
+	}
 
-  @media (width < 320px) {
-  }
+	@media (width < 320px) {
+	}
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CKEditorModule, ChangeEvent } from '@ckeditor/ckeditor5-angular';
 import { EditorConfig } from '@ckeditor/ckeditor5-core/src/editor/editorconfig';
+// @ts-ignore
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { Subject, Subscription, debounceTime } from 'rxjs';
 import { INote } from '../../models/note';
@@ -81,6 +82,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log('destroy');
     this._noteUpdateSubscription.unsubscribe();
     this._noteSubscription.unsubscribe();
     this._noteEditorService.destroy();

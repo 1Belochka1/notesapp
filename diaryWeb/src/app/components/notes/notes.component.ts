@@ -1,5 +1,6 @@
 import { DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { INote } from '../../models/note';
@@ -10,41 +11,56 @@ import { NotesService } from '../../services/notes.service';
 import { SvgTagsComponent } from '../svg/tags/svg-tags.component';
 
 @Component({
-  selector: 'app-notes',
-  standalone: true,
-  imports: [
-    NgFor,
-    NgIf,
-    JsonPipe,
-    DatePipe,
-    StripHtmlTagsPipe,
-    SvgTagsComponent,
-  ],
-  providers: [ContentService],
-  templateUrl: './notes.component.html',
-  styleUrl: './notes.component.scss',
+	selector: 'app-notes',
+	standalone: true,
+	imports: [
+		NgFor,
+		NgIf,
+		JsonPipe,
+		DatePipe,
+		StripHtmlTagsPipe,
+		SvgTagsComponent,
+		FormsModule,
+	],
+	providers: [ContentService],
+	templateUrl: './notes.component.html',
+	styleUrl: './notes.component.scss',
 })
 export class NotesComponent implements OnDestroy {
-  notes: INote[];
-  notesSubscription: Subscription;
+	notes: INote[];
+	viewNotes: INote[];
+	searchText: string = '';
+	notesSubscription: Subscription;
 
-  constructor(private _notesService: NotesService, private _router: Router) {
-    this.notesSubscription = this._notesService.notes$().subscribe((notes) => {
-      this.notes = notes.sort(
-        (a, b) => b.createDate.getTime() - a.createDate.getTime()
-      );
-    });
-  }
+	constructor(private _notesService: NotesService, private _router: Router) {
+		this.notesSubscription = this._notesService.notes$().subscribe((notes) => {
+			this.notes = notes;
+			this.searchInput();
+		});
+	}
 
-  createNote() {
-    this._notesService.createNote();
-  }
+	searchInput = () => {
+		this.viewNotes =
+			this.searchText.length < 1
+				? this.notes
+				: this.notes.filter((n) => {
+						const div = document.createElement('div');
+						div.innerHTML = n.content;
+						return (div.textContent || div.innerText || '')
+							.toLowerCase()
+							.includes(this.searchText.toLowerCase());
+				  });
+	};
 
-  navigateToNote(id: string) {
-    this._router.navigate([mainLayoutRoutesConfig.noteEditor.path, id]);
-  }
+	createNote() {
+		this._notesService.createNote();
+	}
 
-  ngOnDestroy(): void {
-    this.notesSubscription.unsubscribe();
-  }
+	navigateToNote(id: string) {
+		this._router.navigate([mainLayoutRoutesConfig.noteEditor.path, id]);
+	}
+
+	ngOnDestroy(): void {
+		this.notesSubscription.unsubscribe();
+	}
 }

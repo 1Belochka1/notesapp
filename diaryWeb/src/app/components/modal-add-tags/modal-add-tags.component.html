@@ -1,21 +1,33 @@
-<app-modal-layout #layout (click)="clickLayout($event)">
-  <div class="createTag">
-    <input
-      type="text"
-      placeholder="Название тега"
-      [(ngModel)]="createTagName"
-    />
-    <button (click)="createTag()">Создать</button>
-  </div>
-  <div class="tags" *ngIf="userTags.length > 0; else zeroTags">
-    <input type="text" />
-
-    <div class="tags__item tag" *ngFor="let tag of userTags">
-      <span class="tag__title">{{ tag.name }}</span>
-      <button class="tag__add" (click)="addTag(tag.id)">+</button>
-    </div>
-  </div>
-  <ng-template #zeroTags>
-    <div class="zeroTags">Тегов нет</div>
-  </ng-template>
+<app-modal-layout
+	#layout
+	(click)="clickLayout($event)"
+	(closeClick)="outsideClick.emit()"
+>
+	<div class="createTag">
+		<input
+			class="input"
+			type="text"
+			placeholder="Название тега"
+			[(ngModel)]="createTagName"
+		/>
+		<button (click)="createTag()">Создать</button>
+	</div>
+	<div class="searchTag">
+		<input
+			class="input"
+			type="text"
+			placeholder="Поиск"
+			[(ngModel)]="searchText"
+			(input)="searchInput()"
+		/>
+	</div>
+	<div class="tags" *ngIf="userTags.length > 0; else zeroTags">
+		<div class="tags__item tag" *ngFor="let tag of viewTags | async">
+			<span class="tag__title">{{ tag.name }}</span>
+			<button class="tag__add" (click)="addTag(tag.id)">+</button>
+		</div>
+	</div>
+	<ng-template #zeroTags>
+		<div class="zeroTags">Тегов нет</div>
+	</ng-template>
 </app-modal-layout>

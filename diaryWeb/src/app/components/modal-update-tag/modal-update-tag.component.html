@@ -1,1 +1,6 @@
-<p>modal-update-tag works!</p>
+<app-modal-layout (click)="clickLayout($event)" (closeClick)="cancelClick()">
+	<custom-input placeholder="" type="text" [formControl]="newTagNameControl" />
+	<div class="buttons">
+		<button (click)="updateClick()">Обновить</button>
+	</div>
+</app-modal-layout>

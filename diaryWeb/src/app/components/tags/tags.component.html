@@ -1,22 +1,39 @@
 <div class="wrapper" *ngIf="tags">
-  <div class="tags-list">
-    <div class="tag" *ngFor="let tag of tags">
-      <div class="tag__name">{{ tag.name }}</div>
-      <div class="tag__buttons">
-        <button class="buttons" (click)="callModalConfirmDeleteTag(tag.id)">
-          Удалить
-        </button>
-        <button class="buttons" (click)="navigateToTag(tag.id)">Заметки</button>
-        <!-- <button class="buttons">Редактировать</button> -->
-      </div>
-    </div>
-  </div>
+	<input
+		type="text"
+		class="input"
+		placeholder="Поиск"
+		[(ngModel)]="searchText"
+		*ngIf="tags.length > 5"
+		(input)="searchInput()"
+	/>
+	<div class="tags-list">
+		<div class="tag" *ngFor="let tag of viewTags">
+			<div class="tag__name">{{ tag.name }}</div>
+			<div class="tag__buttons">
+				<button class="buttons" (click)="callModalConfirmDeleteTag(tag.id)">
+					Удалить
+				</button>
+				<button class="buttons" (click)="navigateToTag(tag.id)">Заметки</button>
+				<button class="buttons" (click)="callModalUpdateTag(tag.id, tag.name)">
+					Редактировать
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <ng-container *ngIf="isOpenModalConfirm">
-  <app-modal-confirm
-    header="Вы действительно хотите удалить тег?"
-    (confirm)="deleteTag()"
-    (cancel)="isOpenModalConfirm = false"
-  ></app-modal-confirm>
+	<app-modal-confirm
+		header="Вы действительно хотите удалить тег?"
+		(confirm)="deleteTag()"
+		(cancel)="isOpenModalConfirm = false"
+	></app-modal-confirm>
+</ng-container>
+<ng-container *ngIf="isOpenModalUpdate">
+	<app-modal-update-tag
+		[tagName]="tagNameToUpdate"
+		(update)="updateTag($event)"
+		(cancel)="isOpenModalUpdate = false"
+	></app-modal-update-tag>
 </ng-container>

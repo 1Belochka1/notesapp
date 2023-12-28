@@ -1,19 +1,30 @@
+import { AsyncPipe, NgIf } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { CustomInputComponent } from '../ui/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CustomInputComponent, ReactiveFormsModule, RouterLink],
+  imports: [
+    CustomInputComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    NgIf,
+    AsyncPipe,
+  ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
   loginSubscription: Subscription;
+  error: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(
+    null
+  );
 
   form = this.formBuilder.group({
     login: [''],
@@ -42,9 +53,10 @@ export class AuthComponent {
       next: () => {
         this.router.navigate(['/']);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         // Обработать ошибку
         console.log(err);
+        this.error.next(err.error);
       },
     });
   }

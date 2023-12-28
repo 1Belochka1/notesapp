@@ -1,6 +1,6 @@
 import { EditorConfig } from '@ckeditor/ckeditor5-core';
-
 export const ckeditorConfig: EditorConfig = {
+  // @ts-ignore
   image: {
     resizeOptions: [
       {
@@ -33,7 +33,11 @@ export const ckeditorConfig: EditorConfig = {
       'resizeImage:75',
       'resizeImage:original',
       '|',
+      'imageStyle:inline',
       'imageStyle:alignLeft',
+      'imageStyle:alignBlockLeft',
+      'imageStyle:alignCenter',
+      'imageStyle:alignBlockRight',
       'imageStyle:alignRight',
     ],
   },

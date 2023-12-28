@@ -1,179 +1,198 @@
 :root {
-  // common
-  --color-text: #cfcfcf;
+	// common
+	--color-text: #cfcfcf;
 
-  // layout
-  --color-background: #262626;
-  --color-background-navbar: #303030;
-  --color-border-wrapper: #565656;
+	// layout
+	--color-background: #262626;
+	--color-background-navbar: #303030;
+	--color-border-wrapper: #565656;
 
-  // button
-  --color-button-border: #565656;
-  --color-button-background: inherit;
-  --color-button-text: #cfcfcf;
+	// button
+	--color-button-border: #565656;
+	--color-button-background: inherit;
+	--color-button-text: #cfcfcf;
 
-  // input
-  --color-input-text: #cfcfcf;
-  --color-input-text-placeholder: #7b7b7b;
-  --color-input-border: #565656;
-  --color-input-background: inherit;
+	// input
+	--color-input-text: #cfcfcf;
+	--color-input-text-placeholder: #7b7b7b;
+	--color-input-border: #565656;
+	--color-input-background: inherit;
 
-  // gradient border
-  --color-border-gradient-1: #6d55ff;
-  --color-border-gradient-2: #e7cfff;
-  --inset-border-gradient: -0.95px;
+	// gradient border
+	--color-border-gradient-1: #6d55ff;
+	--color-border-gradient-2: #e7cfff;
+	--inset-border-gradient: -0.95px;
 
-  //svg
-  --color-svg-stroke: #fff;
-  --color-svg-hover-stroke: #6d55ff;
-  --width-svg: 30px;
-  --width-svg-stroke: 2px;
+	//svg
+	--color-svg-stroke: #fff;
+	--color-svg-hover-stroke: #6d55ff;
+	--width-svg: 30px;
+	--width-svg-stroke: 2px;
 
-  // note
-  --color-border-notes: #565656;
-  --color-text-content-notes: #9f9f9f;
-  --color-text-create-date-notes: #868686;
-  --color-note-text: #262626;
-  --color-note-tools-border: #585858;
-  --color-note-tools-background: inherit;
-  --color-note-tools-background-hover: #585858;
-  --color-note-tools-delete-background-hover: rgba(201, 63, 63, 0.8);
+	// note
+	--color-border-notes: #565656;
+	--color-text-content-notes: #9f9f9f;
+	--color-note-text: #303030;
+	--color-text-create-date-notes: #868686;
+	--color-note-tools-border: #585858;
+	--color-note-tools-background: inherit;
+	--color-note-tools-background-hover: #585858;
+	--color-note-tools-delete-background-hover: rgba(201, 63, 63, 0.8);
 
-  // tag
-  --color-tag-border: #565656;
+	// tag
+	--color-tag-border: #565656;
 
-  // navbar
-  --font-size-navbar: 24px;
+	// navbar
+	--font-size-navbar: 24px;
 
-  // modal
-  --color-modal-background: rgba(38, 38, 38, 0.94);
-  --color-modal-text: #cfcfcf;
-  --color-modal-text-background: #585858;
-  --color-modal-wrapper-border: #585858;
-  --color-modal-wrapper-background: inherit;
-  --color-modal-input-border: #585858;
-  --color-modal-input-text: #cfcfcf;
+	// modal
+	--color-modal-background: rgba(38, 38, 38, 0.94);
+	--color-modal-text: #cfcfcf;
+	--color-modal-text-background: #585858;
+	--color-modal-wrapper-border: #585858;
+	--color-modal-wrapper-background: inherit;
+	--color-modal-input-border: #585858;
+	--color-modal-input-text: #cfcfcf;
 
-  --ck-border-radius: 0 !important;
+	@media (width < 1024px) {
+		//svg
+		--width-svg: 24px;
 
-  @media (width < 1024px) {
-    //svg
-    --width-svg: 24px;
+		//navbar
+		--font-size-navbar: 18px;
+	}
 
-    //navbar
-    --font-size-navbar: 18px;
-  }
+	@media (width < 768px) {
+		//svg
+		--width-svg: 20px;
 
-  @media (width < 768px) {
-    //svg
-    --width-svg: 20px;
+		//navbar
+		--font-size-navbar: 14px;
+	}
 
-    //navbar
-    --font-size-navbar: 14px;
-  }
+	@media (width < 425px) {
+	}
 
-  @media (width < 425px) {
-  }
-
-  @media (width < 320px) {
-  }
+	@media (width < 320px) {
+	}
 }
 
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 html {
-  height: 100vh;
+	height: 100vh;
+	@media (width < 1024px) {
+	}
 
-  @media (width < 1024px) {
-  }
+	@media (width < 768px) {
+	}
 
-  @media (width < 768px) {
-  }
+	@media (width< 425px) {
+	}
 
-  @media (width< 425px) {
-  }
-
-  @media (width < 320px) {
-  }
+	@media (width < 320px) {
+	}
 }
 
 body {
-  height: 100%;
-  background: var(--color-background);
-  font-family: "Montserrat", sans-serif;
-  color: var(--color-input-text);
+	height: 100%;
+	background: var(--color-background);
+	font-family: "Montserrat", sans-serif;
+	color: var(--color-input-text);
 }
 
 button,
 input {
-  border: none;
-  outline: none;
+	border: none;
+	outline: none;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
-// ul,
-// ol,
-// li {
-//   list-style: none;
-// }
+ul,
+ol,
+li {
+	list-style-position: inside;
+}
 
 .submitButton {
-  font-size: 16px;
+	font-size: 16px;
 
-  width: 100%;
-  max-width: 250px;
-  height: 50px;
-  padding: 10px;
+	width: 100%;
+	max-width: 250px;
+	height: 50px;
+	padding: 10px;
 
-  cursor: pointer;
-  transition: background 0.35s ease;
-  text-transform: uppercase;
+	cursor: pointer;
+	transition: background 0.35s ease;
+	text-transform: uppercase;
 
-  color: var(--color-button-text);
-  border: 1px solid var(--color-button-border);
-  background: var(--color-button-background);
+	color: var(--color-button-text);
+	border: 1px solid var(--color-button-border);
+	background: var(--color-button-background);
 
-  &:hover {
-    background: #303030;
-  }
+	&:hover {
+		background: #303030;
+	}
 }
 
 app-auth,
 app-register,
 app-main-layout {
-  position: relative;
+	position: relative;
 
-  &::before,
-  &::after {
-    position: absolute;
-    z-index: -1;
+	&::before,
+	&::after {
+		position: absolute;
+		z-index: -1;
 
-    content: "";
+		content: "";
 
-    background: linear-gradient(
-      var(--color-border-gradient-1),
-      var(--color-border-gradient-2)
-    );
+		background: linear-gradient(
+			var(--color-border-gradient-1),
+			var(--color-border-gradient-2)
+		);
 
-    inset: var(--inset-border-gradient);
-  }
-  &::after {
-    filter: blur(3px);
-  }
+		inset: var(--inset-border-gradient);
+	}
+	&::after {
+		filter: blur(3px);
+	}
 }
 
 .input {
-  width: 100%;
-  padding: 5px 15px;
-  &::placeholder {
-    text-transform: uppercase;
-  }
+	width: 100%;
+	padding: 5px 15px;
+
+	font-size: 16px;
+
+	color: var(--color-input-text);
+
+	border: 1px solid var(--color-input-border);
+	// border-radius: 5px;
+	background: var(--color-input-background);
+
+	&::placeholder {
+		text-transform: uppercase;
+	}
+
+	@media (width < 1024px) {
+	}
+
+	@media (width < 768px) {
+		font-size: 14px;
+	}
+
+	@media (width< 425px) {
+	}
+
+	@media (width < 320px) {
+	}
 }

@@ -27,6 +27,7 @@ public class NotesHub : Hub
 
 		var notes = await _mediator.Send(query);
 
+
 		await Clients.Caller.SendAsync(
 			"GetNotes",
 			notes);
@@ -44,7 +45,7 @@ public class NotesHub : Hub
 
 		var response = await _mediator.Send(command);
 
-		await Clients.User(userId)
+		await Clients.Caller
 			.SendAsync("CreateNote", response);
 	}
 }

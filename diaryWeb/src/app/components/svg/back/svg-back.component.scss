@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+}
+svg {
+  height: var(--width-svg);
+  width: var(--width-svg);
+  stroke: var(--color-svg-stroke);
+  stroke-width: var(--width-svg-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.5s ease;
+}

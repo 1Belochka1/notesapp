@@ -1,30 +1,38 @@
 <div class="wrapper">
-  <div class="tools">
-    <button class="tools__create" (click)="createNote()">
-      Создать заметку
-    </button>
-  </div>
-  <ng-container *ngIf="notes">
-    <div class="notes" *ngIf="notes.length > 0; else zeroNotes">
-      <div
-        class="note"
-        *ngFor="let note of notes"
-        (click)="navigateToNote(note.id)"
-      >
-        <div class="note__name">{{ note.name }}</div>
-        <div class="note__content">{{ note.content | stripHtmlTags }}</div>
-        <div class="note__tags" *ngIf="note.tags.length > 0">
-          <svg-tags width="15px"></svg-tags>
-          <span class="note__tag">
-            {{ note.tags[0].name }}
-          </span>
-        </div>
-        <div class="note__createDate">
-          {{ note.createDate | date : "longDate" }}
-        </div>
-      </div>
-    </div>
-  </ng-container>
+	<div class="tools">
+		<button class="tools__create" (click)="createNote()">
+			Создать заметку
+		</button>
+	</div>
+	<input
+		type="text"
+		class="input"
+		placeholder="Поиск"
+		[(ngModel)]="searchText"
+		*ngIf="notes.length > 5"
+		(input)="searchInput()"
+	/>
+	<ng-container *ngIf="notes">
+		<div class="notes" *ngIf="viewNotes.length > 0; else zeroNotes">
+			<div
+				class="note"
+				*ngFor="let note of viewNotes"
+				(click)="navigateToNote(note.id)"
+			>
+				<div class="note__name">{{ note.name }}</div>
+				<div class="note__content">{{ note.content | stripHtmlTags }}</div>
+				<div class="note__tags" *ngIf="note.tags.length > 0">
+					<svg-tags width="15px"></svg-tags>
+					<span class="note__tag">
+						{{ note.tags[0].name }}
+					</span>
+				</div>
+				<div class="note__createDate">
+					{{ note.createDate | date : "longDate" }}
+				</div>
+			</div>
+		</div>
+	</ng-container>
 
-  <ng-template #zeroNotes> заметок нет </ng-template>
+	<ng-template #zeroNotes> заметок нет </ng-template>
 </div>

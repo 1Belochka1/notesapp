@@ -22,4 +22,10 @@ export const mainLayoutRoutes: Routes = [
     path: mainLayoutRoutesConfig.tag.path + '/:id',
     component: mainLayoutRoutesConfig.tag.component,
   },
+
+  {
+    title: mainLayoutRoutesConfig.profile.title,
+    path: mainLayoutRoutesConfig.profile.path,
+    component: mainLayoutRoutesConfig.profile.component,
+  },
 ];

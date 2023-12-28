@@ -1,7 +1,9 @@
 <ng-container *ngIf="profile">
-  <div class="login">{{ profile.login }}</div>
-  <div class="firstName">{{ profile.firstName }}</div>
-  <div class="lastName">{{ profile.lastName }}</div>
-  <div class="email">{{ profile.email }}</div>
-  <button (click)="logout()">Выйти из аккаунта</button>
+	<div class="wrapper">
+		<div class="login">Логин: {{ profile.login }}</div>
+		<div class="firstName">Имя: {{ profile.firstName }}</div>
+		<div class="lastName">Фамилия: {{ profile.lastName }}</div>
+		<div class="email">Почта: {{ profile.email }}</div>
+		<button (click)="logout()">Выйти из аккаунта</button>
+	</div>
 </ng-container>

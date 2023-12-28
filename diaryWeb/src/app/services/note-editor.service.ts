@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   HubConnection,
   HubConnectionBuilder,
@@ -7,6 +7,7 @@ import {
 } from '@microsoft/signalr';
 import { Observable, Subject } from 'rxjs';
 import { INote } from '../models/note';
+import { mainLayoutRoutesConfig } from '../routes/main-layout-routes.config';
 import { apiUrls } from './api-urls';
 import { AuthService } from './auth.service';
 import { ContentService } from './content.service';
@@ -23,7 +24,8 @@ export class NoteEditorService {
   constructor(
     private _authService: AuthService,
     private _route: ActivatedRoute,
-    private _contentService: ContentService
+    private _contentService: ContentService,
+    private _router: Router
   ) {
     this._noteId = _route.snapshot.paramMap.get('id')!;
   }
@@ -51,6 +53,7 @@ export class NoteEditorService {
     });
 
     this._hubConnection.on('DeleteNote', () => {
+      this._router.navigate([mainLayoutRoutesConfig.notes.path]);
       this.destroy();
     });
 
@@ -92,7 +95,9 @@ export class NoteEditorService {
   }
 
   public destroy() {
-    this._hubConnection.send('LeaveGroup', this._noteId);
-    this._hubConnection.stop();
+    this._hubConnection
+      .send('LeaveGroup', this._noteId)
+      .then(() => this._hubConnection.stop().catch((er) => console.log(er)))
+      .catch((er) => console.log(er));
   }
 }

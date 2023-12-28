@@ -8,7 +8,6 @@ import { Autosave } from '@ckeditor/ckeditor5-autosave';
 import { Bold, Code, Italic, Underline } from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { CodeBlock } from '@ckeditor/ckeditor5-code-block';
-import type { EditorConfig } from '@ckeditor/ckeditor5-core';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
 import { Heading, Title } from '@ckeditor/ckeditor5-heading';
@@ -25,6 +24,17 @@ import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 declare class Editor extends ClassicEditor {
     static builtinPlugins: (typeof Alignment | typeof Autosave | typeof Base64UploadAdapter | typeof BlockQuote | typeof Bold | typeof Code | typeof CodeBlock | typeof DataFilter | typeof Essentials | typeof FontBackgroundColor | typeof FontColor | typeof FontFamily | typeof FontSize | typeof GeneralHtmlSupport | typeof Heading | typeof Highlight | typeof HorizontalLine | typeof Image | typeof ImageCaption | typeof ImageInsert | typeof ImageResize | typeof ImageStyle | typeof ImageToolbar | typeof ImageUpload | typeof Indent | typeof IndentBlock | typeof Italic | typeof List | typeof ListProperties | typeof Paragraph | typeof RemoveFormat | typeof Table | typeof TableCaption | typeof TableCellProperties | typeof TableColumnResize | typeof TableProperties | typeof TableToolbar | typeof Title | typeof TodoList | typeof Underline | typeof WordCount)[];
-    static defaultConfig: EditorConfig;
+    static defaultConfig: {
+        toolbar: {
+            items: string[];
+        };
+        language: string;
+        image: {
+            toolbar: string[];
+        };
+        table: {
+            contentToolbar: string[];
+        };
+    };
 }
 export default Editor;

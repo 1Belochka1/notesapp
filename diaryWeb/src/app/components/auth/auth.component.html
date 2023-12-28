@@ -17,6 +17,7 @@
       </custom-input>
     </div>
     <button type="submit" class="submitButton">Войти</button>
+    <div class="error" *ngIf="(error | async) != null">{{ error | async }}</div>
     <a routerLink="/register" class="registerLink">Регистрация</a>
   </form>
 </div>
