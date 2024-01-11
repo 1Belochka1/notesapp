@@ -1,0 +1,12 @@
+<h2>Заблокировано</h2>
+<input
+	type="text"
+	class="input"
+	placeholder="Поиск"
+	[(ngModel)]="pinCode"
+	(input)="validateNumericInput($event)"
+	maxlength="6"
+/>
+<button class="button" [disabled]="pinCode.length < 6" (click)="unlock()">
+	Разблокировать
+</button>

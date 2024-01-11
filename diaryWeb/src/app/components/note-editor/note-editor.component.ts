@@ -9,6 +9,8 @@ import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { Subject, Subscription, debounceTime } from 'rxjs';
 import { INote } from '../../models/note';
 import { mainLayoutRoutesConfig } from '../../routes/main-layout-routes.config';
+import { ContentService } from '../../services/content.service';
+import { ExportService } from '../../services/export.service';
 import { NoteEditorService } from '../../services/note-editor.service';
 import { ModalAddTagsComponent } from '../modal-add-tags/modal-add-tags.component';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
@@ -17,74 +19,77 @@ import { SvgTagsComponent } from '../svg/tags/svg-tags.component';
 import { ckeditorConfig } from './ckeditor.config';
 
 @Component({
-  selector: 'app-note-editor',
-  standalone: true,
-  imports: [
-    CKEditorModule,
-    FormsModule,
-    SvgTagsComponent,
-    ModalNoteTagsComponent,
-    ModalAddTagsComponent,
-    ModalConfirmComponent,
-    NgFor,
-    NgIf,
-  ],
-  providers: [NoteEditorService],
-  templateUrl: './note-editor.component.html',
-  styleUrl: './note-editor.component.scss',
+	selector: 'app-note-editor',
+	standalone: true,
+	imports: [
+		CKEditorModule,
+		FormsModule,
+		SvgTagsComponent,
+		ModalNoteTagsComponent,
+		ModalAddTagsComponent,
+		ModalConfirmComponent,
+		NgFor,
+		NgIf,
+	],
+	providers: [NoteEditorService, ContentService, ExportService],
+	templateUrl: './note-editor.component.html',
+	styleUrl: './note-editor.component.scss',
 })
 export class NoteEditorComponent implements OnInit, OnDestroy {
-  private _updateNoteSubject = new Subject<null>();
-  private _noteSubscription: Subscription;
-  private _noteUpdateSubscription: Subscription;
+	private _updateNoteSubject = new Subject<null>();
+	private _noteSubscription: Subscription;
+	private _noteUpdateSubscription: Subscription;
 
-  note: INote;
-  isOpenModalNoteTags: boolean = false;
-  isOpenModalAddTags: boolean = false;
-  isOpenModalConfirm: boolean = false;
+	note: INote;
+	isOpenModalNoteTags: boolean = false;
+	isOpenModalAddTags: boolean = false;
+	isOpenModalConfirm: boolean = false;
 
-  content = '';
+	content = '';
 
-  editor = Editor;
-  config: EditorConfig = ckeditorConfig;
+	editor = Editor;
+	config: EditorConfig = ckeditorConfig;
 
-  constructor(
-    private _noteEditorService: NoteEditorService,
-    private _router: Router
-  ) {
-    _noteEditorService.createConnection();
-    this._noteSubscription = _noteEditorService.note$().subscribe((note) => {
-      this.note = note;
-      this.content = note.content;
-    });
-  }
+	constructor(
+		private _noteEditorService: NoteEditorService,
+		private _exportService: ExportService,
+		private _contentService: ContentService,
+		private _router: Router
+	) {
+		_noteEditorService.createConnection();
+		this._noteSubscription = _noteEditorService.note$().subscribe((note) => {
+			this.note = note;
+			this.content = note.content;
+		});
+	}
 
-  updateNote = () => this._noteEditorService.updateNote(this.content);
+	exportToPdf = () => {
+		this._exportService.exportToPdf(this.note.id);
+	};
 
-  change = (ev: ChangeEvent) => this._updateNoteSubject.next(null);
+	change = (ev: ChangeEvent) => this._updateNoteSubject.next(null);
 
-  addTag = (tagId: string) => this._noteEditorService.addTag(tagId);
+	addTag = (tagId: string) => this._noteEditorService.addTag(tagId);
 
-  deleteTag = (tagId: string) => this._noteEditorService.deleteTag(tagId);
+	deleteTag = (tagId: string) => this._noteEditorService.deleteTag(tagId);
 
-  deleteNote() {
-    this._noteEditorService.deleteNote();
-    this.isOpenModalConfirm = false;
-    this._router.navigate([mainLayoutRoutesConfig.notes.path]);
-  }
+	deleteNote() {
+		this._noteEditorService.deleteNote();
+		this.isOpenModalConfirm = false;
+		this._router.navigate([mainLayoutRoutesConfig.notes.path]);
+	}
 
-  ngOnInit(): void {
-    this._noteUpdateSubscription = this._updateNoteSubject
-      .pipe(debounceTime(800))
-      .subscribe(() => {
-        this.updateNote();
-      });
-  }
+	ngOnInit(): void {
+		this._noteUpdateSubscription = this._updateNoteSubject
+			.pipe(debounceTime(800))
+			.subscribe(() => {
+				this._noteEditorService.updateNote(this.content);
+			});
+	}
 
-  ngOnDestroy(): void {
-    console.log('destroy');
-    this._noteUpdateSubscription.unsubscribe();
-    this._noteSubscription.unsubscribe();
-    this._noteEditorService.destroy();
-  }
+	ngOnDestroy(): void {
+		this._noteUpdateSubscription.unsubscribe();
+		this._noteSubscription.unsubscribe();
+		this._noteEditorService.destroy();
+	}
 }

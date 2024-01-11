@@ -2,6 +2,7 @@
 using Diary.Application.Note.Commands.Delete;
 using Diary.Application.Note.Commands.DeleteTagByNoteId;
 using Diary.Application.Note.Commands.Update;
+using Diary.Application.Note.Queries.ExportPdfNote;
 using Diary.Application.Note.Queries.GetById;
 using Diary.Contracts.Note;
 using MediatR;
@@ -125,6 +126,17 @@ public class NoteEditorHub : Hub
 
 		await _hubContext.Clients.User(userId)
 			.SendAsync("UpdateNoteInNotes", response);
+	}
+
+	public async Task ExportPdf(string html)
+	{
+		var query = new ExportPdfNoteQuery(html);
+
+		var response = await _mediator.Send(query);
+
+		await Clients.Caller.SendAsync(
+			"ExportPdf",
+			response);
 	}
 
 	public async Task JoinGroup(string groupId)

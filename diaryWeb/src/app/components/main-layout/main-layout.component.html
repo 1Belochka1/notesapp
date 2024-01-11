@@ -1,6 +1,12 @@
-<div class="wrapper">
-  <nav navbar></nav>
-  <div class="content">
-    <router-outlet />
-  </div>
+<div
+	class="wrapper"
+	(mousemove)="onUserActivity()"
+	(keydown)="onUserActivity()"
+	*ngIf="!isLocked"
+>
+	<nav navbar></nav>
+	<div class="content">
+		<router-outlet />
+	</div>
 </div>
+<app-lock-screen *ngIf="isLocked"></app-lock-screen>

@@ -5,5 +5,31 @@
 		<div class="lastName">Фамилия: {{ profile.lastName }}</div>
 		<div class="email">Почта: {{ profile.email }}</div>
 		<button (click)="logout()">Выйти из аккаунта</button>
+		<div class="pinCode">
+			{{ isPinCode ? "Обновите пин-код" : "Установите пин-код" }}
+		</div>
+		<input
+			type="text"
+			class="input"
+			[placeholder]="isPinCode ? 'Старый пин-код' : 'Пин-код'"
+			(input)="validateNumericInput($event)"
+			[(ngModel)]="pinCode"
+			maxlength="6"
+		/>
+		<input
+			maxlength="6"
+			type="text"
+			class="input"
+			placeholder="Новый пин-код"
+			*ngIf="isPinCode"
+			[(ngModel)]="newPinCode"
+			(input)="validateNumericInput($event)"
+		/>
+		<button
+			(click)="updatePinCode()"
+			[disabled]="pinCode.length < 6 || (isPinCode && newPinCode.length < 6)"
+		>
+			{{ isPinCode ? "Обновить" : "Установить" }}
+		</button>
 	</div>
 </ng-container>

@@ -1,7 +1,9 @@
 ﻿using Diary.Application.Common.Interfaces.Authentication;
+using Diary.Application.Common.Interfaces.Note;
 using Diary.Application.Common.Interfaces.Persistence;
 using Diary.Application.Common.Interfaces.Services;
 using Diary.Infrastructure.Authentication;
+using Diary.Infrastructure.Note;
 using Diary.Infrastructure.Persistence;
 using Diary.Infrastructure.Persistence.Repositories;
 using Diary.Infrastructure.Services;
@@ -21,6 +23,8 @@ public static class DependencyInjection
 		this IServiceCollection services,
 		ConfigurationManager configuration)
 	{
+		Encoding.RegisterProvider(
+			CodePagesEncodingProvider.Instance);
 		services
 			.AddAuth(configuration)
 			.AddPersistence();
@@ -67,7 +71,7 @@ public static class DependencyInjection
 		services
 			.AddSingleton<IPasswordHasher,
 				PasswordHasher>();
-
+		services.AddSingleton<IExportPdf, ExportPdf>();
 		services.AddAuthentication(
 				JwtBearerDefaults.AuthenticationScheme)
 			.AddJwtBearer(

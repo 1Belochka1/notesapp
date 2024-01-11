@@ -45,6 +45,7 @@ public class
 			throw new Exception(
 				"Пользователь с данным логином существует");
 
+
 		var passwordHash =
 			_passwordHasher.GeneratePassword(
 				command.Password);

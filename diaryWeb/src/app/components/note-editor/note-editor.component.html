@@ -1,48 +1,58 @@
 <div class="tools">
-  <ng-container *ngIf="note">
-    <ng-container *ngIf="note.tags">
-      <button
-        class="tools__button"
-        (click)="isOpenModalNoteTags = !isOpenModalNoteTags"
-      >
-        Теги
-      </button>
-      <button
-        class="tools__button"
-        (click)="isOpenModalAddTags = !isOpenModalAddTags"
-      >
-        Добавить теги
-      </button>
-      <ng-container *ngIf="isOpenModalNoteTags">
-        <app-modal-note-tags
-          [tags]="note.tags"
-          (outsideClick)="isOpenModalNoteTags = false"
-          (deleteTagClick)="deleteTag($event)"
-        ></app-modal-note-tags>
-      </ng-container>
-      <ng-container *ngIf="isOpenModalAddTags">
-        <app-modal-add-tags
-          [noteTags]="note.tags"
-          (outsideClick)="isOpenModalAddTags = false"
-          (addTagClick)="addTag($event)"
-        ></app-modal-add-tags>
-      </ng-container>
-      <ng-container *ngIf="isOpenModalConfirm">
-        <app-modal-confirm
-          header="Вы действительно хотите удалить заметку?"
-          (confirm)="deleteNote()"
-          (cancel)="isOpenModalConfirm = false"
-        ></app-modal-confirm>
-      </ng-container>
-    </ng-container>
-    <button class="tools__button delete" (click)="isOpenModalConfirm = true">
-      Удалить
-    </button>
-  </ng-container>
+	<ng-container *ngIf="note">
+		<ng-container *ngIf="note.tags">
+			<button
+				class="tools__button"
+				(click)="isOpenModalNoteTags = !isOpenModalNoteTags"
+			>
+				Теги
+			</button>
+			<button
+				class="tools__button"
+				(click)="isOpenModalAddTags = !isOpenModalAddTags"
+			>
+				Добавить теги
+			</button>
+
+			<!----- Modal ----->
+
+			<ng-container *ngIf="isOpenModalNoteTags">
+				<app-modal-note-tags
+					[tags]="note.tags"
+					(outsideClick)="isOpenModalNoteTags = false"
+					(deleteTagClick)="deleteTag($event)"
+				></app-modal-note-tags>
+			</ng-container>
+			<ng-container *ngIf="isOpenModalAddTags">
+				<app-modal-add-tags
+					[noteTags]="note.tags"
+					(outsideClick)="isOpenModalAddTags = false"
+					(addTagClick)="addTag($event)"
+				></app-modal-add-tags>
+			</ng-container>
+			<ng-container *ngIf="isOpenModalConfirm">
+				<app-modal-confirm
+					header="Вы действительно хотите удалить заметку?"
+					(confirm)="deleteNote()"
+					(cancel)="isOpenModalConfirm = false"
+				></app-modal-confirm>
+			</ng-container>
+
+			<!----- END Modal ----->
+			<!--  -->
+		</ng-container>
+
+		<button class="tools__button delete" (click)="isOpenModalConfirm = true">
+			Удалить
+		</button>
+
+		<button class="tools__button" (click)="exportToPdf()">Экспорт в PDF</button>
+	</ng-container>
 </div>
 <ckeditor
-  [(ngModel)]="content"
-  [editor]="editor"
-  [config]="config"
-  (change)="change($event)"
+	id="editor"
+	[(ngModel)]="content"
+	[editor]="editor"
+	[config]="config"
+	(change)="change($event)"
 ></ckeditor>

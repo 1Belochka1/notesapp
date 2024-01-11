@@ -1,7 +1,9 @@
 ﻿using Diary.Api.Hubs;
 using Diary.Application.Common.Note;
 using Diary.Application.Note.Commands.Create;
+using Diary.Application.Note.Queries.ExportPdfNote;
 using Diary.Application.Note.Queries.GetAllByUserId;
+using Diary.Application.Note.Queries.GetById;
 using Diary.Application.Tag.Query.GetAllNotesByTagId;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -43,6 +45,24 @@ public class NotesController : ApiController
 		var notes = await _mediator.Send(query);
 
 		return Ok(notes);
+	}
+
+	[HttpGet("exportPdf/{noteId}")]
+	public async Task<IActionResult> ExportPdf(
+		string noteId)
+	{
+		var queryNote =
+			new GetByIdQuery(Guid.Parse(noteId));
+
+		var responseNote = await _mediator.Send(queryNote);
+
+		var queryExport =
+			new ExportPdfNoteQuery(responseNote.Content);
+
+		var responseExport =
+			await _mediator.Send(queryExport);
+
+		return Ok(responseExport);
 	}
 
 	[HttpGet("getAllByTagId/{tagId}")]

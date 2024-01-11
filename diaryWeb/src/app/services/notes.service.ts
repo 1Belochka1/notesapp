@@ -23,7 +23,6 @@ export class NotesService {
 
 	public createConnection() {
 		const token = this._authService.getUserToken();
-		console.log(token);
 		this._hubConnection = new HubConnectionBuilder()
 			// .configureLogging(LogLevel.None)
 			.withUrl(apiUrls.socket.notes, {
@@ -58,12 +57,10 @@ export class NotesService {
 		});
 
 		this._hubConnection.on('DeleteTag', (tag: ITag) => {
-			console.log(tag);
 			let notes = this._notes.getValue();
 			notes = notes.map((n) => {
 				return { ...n, tags: n.tags.filter((t) => t.id !== tag.id) };
 			});
-			console.log(notes);
 			this._notes.next(notes);
 		});
 	}
