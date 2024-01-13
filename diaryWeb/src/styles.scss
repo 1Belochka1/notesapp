@@ -32,7 +32,7 @@
 	// note
 	--color-border-notes: #565656;
 	--color-text-content-notes: #9f9f9f;
-	--color-note-text: #303030;
+	--color-note-text: #cfcfcf;
 	--color-text-create-date-notes: #868686;
 	--color-note-tools-border: #585858;
 	--color-note-tools-background: inherit;
@@ -53,6 +53,15 @@
 	--color-modal-wrapper-background: inherit;
 	--color-modal-input-border: #585858;
 	--color-modal-input-text: #cfcfcf;
+
+	--ck-color-base-background: #262626 !important;
+	--ck-color-base-text: #cfcfcf !important;
+	--ck-color-base-border: #565656 !important;
+	--ck-border-radius: 0 !important;
+	--ck-color-focus-border: #585858 !important;
+	--ck-color-button-on-color: #585858 !important;
+	--ck-color-list-button-on-text: #cfcfcf !important;
+	--ck-color-button-default-hover-background: #585858 !important;
 
 	@media (width < 1024px) {
 		//svg
