@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CryptoService } from '../../services/crypto.service';
@@ -13,7 +13,7 @@ import { ProfileService } from '../../services/profile.service';
 	templateUrl: './profile.component.html',
 	styleUrl: './profile.component.scss',
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 	profile: any;
 	constructor(
 		private profileService: ProfileService,

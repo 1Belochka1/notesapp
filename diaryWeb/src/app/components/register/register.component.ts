@@ -81,7 +81,7 @@ export class RegisterComponent {
 		},
 		{
 			validators: [passwordConfirmValidator],
-			updateOn: 'blur',
+			updateOn: 'submit',
 		}
 	);
 

@@ -1,0 +1,34 @@
+﻿services:
+
+  db:
+    container_name: Dbp
+    image: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: Belochka0301
+  
+  diary.api:
+    container_name: Api
+    image: diary.api
+    ports:
+      - 8080:80
+    build:
+      context: .
+      dockerfile: Diary.Api/Dockerfile
+    depends_on:
+      - db
+  
+  diary.web:
+    container_name: Web
+    image: diary.web
+    ports:
+      - 4200:4200
+    build:
+      context: .
+      dockerfile: diaryWeb/Dockerfile
+    depends_on:
+      - diary.api
+    
+

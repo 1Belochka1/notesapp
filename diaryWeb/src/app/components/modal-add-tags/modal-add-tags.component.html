@@ -8,10 +8,12 @@
 			class="input"
 			type="text"
 			placeholder="Название тега"
+			[class.invalid]="error !== null"
 			[(ngModel)]="createTagName"
 		/>
 		<button (click)="createTag()">Создать</button>
 	</div>
+	<div class="error" *ngIf="error !== null">{{ error }}</div>
 	<div class="searchTag">
 		<input
 			class="input"

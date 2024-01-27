@@ -59,4 +59,9 @@ export class InactivityService {
 				)
 			);
 	}
+
+	destroy() {
+		clearTimeout(this.inactivityTimeout);
+		this.isLocked.next(false);
+	}
 }

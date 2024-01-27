@@ -1,0 +1,22 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  diary.api:
+    build:
+      context: "D:\\Проекты\\PersonalDiary\\app\\DiaryApi"
+      dockerfile: "Diary.Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Release/net7.0/Diary.Api.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "diary.api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\holog\\AppData\\Roaming\\Microsoft\\UserSecrets:/root/.microsoft/usersecrets"
+    - "C:\\Users\\holog\\.nuget\\packages:/root/.nuget/packages"
+    - "D:\\Проекты\\PersonalDiary\\app\\DiaryApi\\Diary.Api:/app:rw"
+    - "D:\\Проекты\\PersonalDiary\\app\\DiaryApi:/src:rw"
+    working_dir: "/app"

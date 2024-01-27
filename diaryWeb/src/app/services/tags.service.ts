@@ -17,6 +17,10 @@ export class TagsService {
 
 	private _tags: BehaviorSubject<ITag[]> = new BehaviorSubject<ITag[]>([]);
 
+	private _error: BehaviorSubject<string | null> = new BehaviorSubject<
+		string | null
+	>(null);
+
 	private _search: BehaviorSubject<string | null> = new BehaviorSubject<
 		string | null
 	>(null);
@@ -39,10 +43,17 @@ export class TagsService {
 			this._tags.next(tags);
 		});
 
-		this._hubConnection.on('CreateTag', (tag: ITag) => {
+		this._hubConnection.on('CreateTag', (response: ITag | string) => {
 			const tags = this._tags.getValue();
 
-			tags.push(tag);
+			if (typeof response === 'string') {
+				this._error.next(response);
+				console.log(response);
+				return;
+			}
+
+			this._error.next(null);
+			tags.push(response);
 			this._tags.next(tags);
 		});
 
@@ -82,5 +93,9 @@ export class TagsService {
 
 	public tags$(): Observable<ITag[]> {
 		return this._tags.asObservable();
+	}
+
+	public error$(): Observable<string | null> {
+		return this._error.asObservable();
 	}
 }

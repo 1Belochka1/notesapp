@@ -1,5 +1,5 @@
 import { NgComponentOutlet, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { InactivityService } from '../../services/inactivity.service';
@@ -25,9 +25,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 	templateUrl: './main-layout.component.html',
 	styleUrl: './main-layout.component.scss',
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit, OnDestroy {
 	private isLockedSubscription: Subscription;
 	constructor(private inactivityService: InactivityService) {}
+
 	isLocked = false;
 
 	ngOnInit() {
@@ -37,6 +38,11 @@ export class MainLayoutComponent {
 				this.isLocked = isLocked;
 			});
 		this.resetInactivityTimer();
+	}
+
+	ngOnDestroy(): void {
+		this.isLockedSubscription.unsubscribe();
+		this.inactivityService.destroy();
 	}
 
 	resetInactivityTimer() {

@@ -30,11 +30,13 @@ export class ModalAddTagsComponent implements OnInit, OnDestroy {
 	noteTags: ITag[] = [];
 
 	private _tagsSubscription: Subscription;
+	private _errorSubscription: Subscription;
 
 	viewTags: BehaviorSubject<ITag[]> = new BehaviorSubject<ITag[]>([]);
 	userTags: ITag[] = [];
 	createTagName: string = '';
 	searchText: string = '';
+	error: string | null = null;
 
 	constructor(private _tagsService: TagsService) {
 		_tagsService.createConnection();
@@ -49,7 +51,10 @@ export class ModalAddTagsComponent implements OnInit, OnDestroy {
 				  )
 		);
 
-	createTag = () => this._tagsService.createTag(this.createTagName);
+	createTag = () =>
+		this.createTagName.length > 0
+			? this._tagsService.createTag(this.createTagName)
+			: (this.error = 'Название тега не может быть пустым');
 
 	addTag(tagId: string) {
 		this.addTagClick.emit(tagId);
@@ -79,6 +84,10 @@ export class ModalAddTagsComponent implements OnInit, OnDestroy {
 				this.userTags = tags;
 				this.searchInput();
 			});
+
+		this._errorSubscription = this._tagsService
+			.error$()
+			.subscribe((error) => (this.error = error));
 	}
 
 	ngOnDestroy(): void {
