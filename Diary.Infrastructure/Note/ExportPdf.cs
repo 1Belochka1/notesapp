@@ -11,8 +11,6 @@ public class ExportPdf : IExportPdf
 		html =
 			$"<html><body>{html}</body></html>";
 
-		var stream = new MemoryStream();
-
 		byte[] pdfBytes = null;
 		using (var ms = new MemoryStream())
 		{

@@ -41,7 +41,8 @@ public static class DependencyInjection
 	{
 		services.AddDbContext<DiaryDbContext>(
 			option => option.UseNpgsql(
-				"Host=Dbp;Port=5432;Database=diary;Username=postgres;Password=Belochka0301"));
+				// "Host=Dbp;Port=5432;Database=diary;Username=postgres;Password=Belochka0301"));
+				"Host=localhost;Database=diary;Username=postgres;Password=Belochka0301"));
 		services
 			.AddScoped<IUserRepository, UserRepository>();
 		services

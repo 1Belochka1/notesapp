@@ -2,13 +2,13 @@
 services:
   diary.api:
     build:
-      context: "D:\\Проекты\\PersonalDiary\\app\\DiaryApi"
+      context: "D:\\Проекты\\PersonalDiary\\app"
       dockerfile: "Diary.Api/Dockerfile"
       target: "base"
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Release/net7.0/Diary.Api.dll"
+    - "/app/bin/Debug/net7.0/Diary.Api.dll"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
@@ -17,6 +17,6 @@ services:
     volumes:
     - "C:\\Users\\holog\\AppData\\Roaming\\Microsoft\\UserSecrets:/root/.microsoft/usersecrets"
     - "C:\\Users\\holog\\.nuget\\packages:/root/.nuget/packages"
-    - "D:\\Проекты\\PersonalDiary\\app\\DiaryApi\\Diary.Api:/app:rw"
-    - "D:\\Проекты\\PersonalDiary\\app\\DiaryApi:/src:rw"
+    - "D:\\Проекты\\PersonalDiary\\app\\Diary.Api:/app:rw"
+    - "D:\\Проекты\\PersonalDiary\\app:/src:rw"
     working_dir: "/app"

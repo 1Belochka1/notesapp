@@ -2,11 +2,11 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CKEditorModule, ChangeEvent } from '@ckeditor/ckeditor5-angular';
+import { ChangeEvent, CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EditorConfig } from '@ckeditor/ckeditor5-core/src/editor/editorconfig';
-// @ts-ignore
-import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import { Subject, Subscription, debounceTime } from 'rxjs';
+
+import Editor from 'ckeditor5-custom-build';
+import { debounceTime, Subject, Subscription } from 'rxjs';
 import { INote } from '../../models/note';
 import { mainLayoutRoutesConfig } from '../../routes/main-layout-routes.config';
 import { ContentService } from '../../services/content.service';
@@ -36,19 +36,16 @@ import { ckeditorConfig } from './ckeditor.config';
 	styleUrl: './note-editor.component.scss',
 })
 export class NoteEditorComponent implements OnInit, OnDestroy {
-	private _updateNoteSubject = new Subject<null>();
-	private _noteSubscription: Subscription;
-	private _noteUpdateSubscription: Subscription;
-
 	note: INote;
 	isOpenModalNoteTags: boolean = false;
 	isOpenModalAddTags: boolean = false;
 	isOpenModalConfirm: boolean = false;
-
 	content = '';
-
 	editor = Editor;
 	config: EditorConfig = ckeditorConfig;
+	private _updateNoteSubject = new Subject<null>();
+	private _noteSubscription: Subscription;
+	private _noteUpdateSubscription: Subscription;
 
 	constructor(
 		private _noteEditorService: NoteEditorService,

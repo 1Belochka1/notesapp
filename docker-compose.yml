@@ -6,8 +6,12 @@
     ports:
       - 5432:5432
     restart: always
+    volumes:
+      - pddata:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: Belochka0301
+  
+  
   
   diary.api:
     container_name: Api
@@ -30,5 +34,9 @@
       dockerfile: diaryWeb/Dockerfile
     depends_on:
       - diary.api
-    
+
+
+
+volumes:
+  pddata:
 

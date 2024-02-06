@@ -28,21 +28,26 @@ export class ModalAddTagsComponent implements OnInit, OnDestroy {
 
 	@Input()
 	noteTags: ITag[] = [];
-
-	private _tagsSubscription: Subscription;
-	private _errorSubscription: Subscription;
-
 	viewTags: BehaviorSubject<ITag[]> = new BehaviorSubject<ITag[]>([]);
 	userTags: ITag[] = [];
 	createTagName: string = '';
 	searchText: string = '';
-	error: string | null = null;
+	errorCreateTag: string | null = null;
+	errorSearchTag: string | null = null;
+	private _tagsSubscription: Subscription;
+	private _errorSubscription: Subscription;
 
 	constructor(private _tagsService: TagsService) {
 		_tagsService.createConnection();
 	}
 
-	searchInput = () =>
+	searchInput() {
+		if (this.searchText.length > 50) {
+			this.errorSearchTag = 'Максимальная длинна 50';
+		} else {
+			this.errorSearchTag = null;
+		}
+
 		this.viewTags.next(
 			this.searchText.length < 1
 				? this.userTags
@@ -50,11 +55,20 @@ export class ModalAddTagsComponent implements OnInit, OnDestroy {
 						t.name.toLowerCase().includes(this.searchText.toLowerCase())
 				  )
 		);
+	}
 
-	createTag = () =>
-		this.createTagName.length > 0
-			? this._tagsService.createTag(this.createTagName)
-			: (this.error = 'Название тега не может быть пустым');
+	createTag() {
+		if (this.createTagName.length < 0) {
+			this.errorCreateTag = 'Поле обязательно для заполнения';
+			return;
+		}
+		if (this.createTagName.length > 50) {
+			this.errorCreateTag = 'Максимальная длинна 50';
+			return;
+		}
+
+		this._tagsService.createTag(this.createTagName);
+	}
 
 	addTag(tagId: string) {
 		this.addTagClick.emit(tagId);
@@ -87,7 +101,7 @@ export class ModalAddTagsComponent implements OnInit, OnDestroy {
 
 		this._errorSubscription = this._tagsService
 			.error$()
-			.subscribe((error) => (this.error = error));
+			.subscribe((error) => (this.errorCreateTag = error));
 	}
 
 	ngOnDestroy(): void {

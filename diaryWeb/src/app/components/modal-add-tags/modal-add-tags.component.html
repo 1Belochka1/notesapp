@@ -3,32 +3,40 @@
 	(click)="clickLayout($event)"
 	(closeClick)="outsideClick.emit()"
 >
+	<div class="title">Создать тег</div>
 	<div class="createTag">
 		<input
-			class="input"
-			type="text"
-			placeholder="Название тега"
-			[class.invalid]="error !== null"
 			[(ngModel)]="createTagName"
+			[class.invalid]="errorCreateTag !== null"
+			class="input"
+			placeholder="Название тега"
+			type="text"
 		/>
 		<button (click)="createTag()">Создать</button>
 	</div>
-	<div class="error" *ngIf="error !== null">{{ error }}</div>
+	<div *ngIf="errorCreateTag !== null" class="error">{{ errorCreateTag }}</div>
 	<div class="searchTag">
+		<div class="title">Поиск тега</div>
 		<input
-			class="input"
-			type="text"
-			placeholder="Поиск"
-			[(ngModel)]="searchText"
 			(input)="searchInput()"
+			[(ngModel)]="searchText"
+			class="input"
+			placeholder="Поиск"
+			type="text"
 		/>
-	</div>
-	<div class="tags" *ngIf="userTags.length > 0; else zeroTags">
-		<div class="tags__item tag" *ngFor="let tag of viewTags | async">
-			<span class="tag__title">{{ tag.name }}</span>
-			<button class="tag__add" (click)="addTag(tag.id)">+</button>
+		<div *ngIf="errorSearchTag !== null" class="error">
+			{{ errorSearchTag }}
 		</div>
 	</div>
+	<div *ngIf="viewTags.getValue().length > 0; else zeroTags" class="tags">
+		<div *ngFor="let tag of viewTags | async" class="tags__item tag">
+			<!-- Отображение имени тега -->
+			<span class="tag__title">{{ tag.name }}</span>
+			<!-- Кнопка для добавления тега -->
+			<button (click)="addTag(tag.id)" class="tag__add">+</button>
+		</div>
+	</div>
+	<!-- Отображается, когда тегов нет -->
 	<ng-template #zeroTags>
 		<div class="zeroTags">Тегов нет</div>
 	</ng-template>

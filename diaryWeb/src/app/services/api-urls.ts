@@ -1,4 +1,4 @@
-const api = 'http://localhost:8080';
+const api = 'https://localhost:7141';
 const auth = api + '/auth';
 const users = api + '/users';
 const profile = api + '/profile';

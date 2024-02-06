@@ -68,7 +68,7 @@ public class Tests
 			string? email,
 			string? lastName,
 			string? firstName,
-			string message)
+			string? message)
 	{
 		var valid_result = Validation_User(
 			login,
@@ -76,6 +76,7 @@ public class Tests
 			email,
 			lastName,
 			firstName);
+
 		Assert.That(valid_result.Item2, Is.True, message);
 	}
 }

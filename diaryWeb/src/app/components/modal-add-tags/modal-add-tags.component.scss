@@ -30,6 +30,8 @@
 
 			padding: 5px 10px;
 			transition: all 0.45s ease;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			&:hover {
 				background: var(--color-modal-text-background);
 			}
