@@ -41,8 +41,8 @@ public static class DependencyInjection
 	{
 		services.AddDbContext<DiaryDbContext>(
 			option => option.UseNpgsql(
-				// "Host=Dbp;Port=5432;Database=diary;Username=postgres;Password=Belochka0301"));
-				"Host=localhost;Database=diary;Username=postgres;Password=Belochka0301"));
+				"Host=localhost;Port=5432;Database=notesapp;Username=notesapp;Password=notesapp"));
+		// "Host=localhost;Database=diary;Username=postgres;Password=Belochka0301"));
 		services
 			.AddScoped<IUserRepository, UserRepository>();
 		services
@@ -105,17 +105,17 @@ public static class DependencyInjection
 							var path = context.HttpContext
 								.Request.Path;
 							if ((!string.IsNullOrEmpty(
-								     accessToken) &&
-							     path.StartsWithSegments(
-								     "/notes")) ||
-							    path.StartsWithSegments(
-								    "/noteEditor") ||
-							    path.StartsWithSegments(
-								    "/tags") ||
-							    path.StartsWithSegments(
-								    "/tag") ||
-							    path.StartsWithSegments(
-								    "/errors"))
+										 accessToken) &&
+									 path.StartsWithSegments(
+										 "/notes")) ||
+									path.StartsWithSegments(
+										"/noteEditor") ||
+									path.StartsWithSegments(
+										"/tags") ||
+									path.StartsWithSegments(
+										"/tag") ||
+									path.StartsWithSegments(
+										"/errors"))
 								context.Token = accessToken;
 
 							return Task.CompletedTask;

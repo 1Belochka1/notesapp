@@ -85,20 +85,25 @@ public class NoteRepository : INoteRepository
 		Guid noteId,
 		Guid tagId)
 	{
+		// Получаем заметку из базы данных вместе со связанными тегами
 		var note =
 			await _dbContext.Notes.Include(n => n.Tags)
 				.SingleOrDefaultAsync(
 					n => n.Id == noteId);
 
+		// Получаем тег из базы данных
 		var tag =
 			await _dbContext.Tags.SingleOrDefaultAsync(
 				t => t.Id == tagId);
 
+		// Если заметка или тег не найдены, возвращаем null
 		if (note is null || tag is null)
 			return null;
 
+		// Добавляем тег к заметке
 		note.Tags.Add(tag);
 
+		// Возвращаем обновленную заметку
 		return note;
 	}
 

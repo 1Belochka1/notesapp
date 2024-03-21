@@ -1,27 +1,27 @@
 <div class="wrapper">
 	<div class="tools">
-		<button class="tools__create" (click)="createNote()">
+		<button (click)="createNote()" class="tools__create">
 			Создать заметку
 		</button>
 	</div>
 	<input
-		type="text"
+		(input)="searchInput()"
+		*ngIf="notes.length > 5"
+		[(ngModel)]="searchText"
 		class="input"
 		placeholder="Поиск"
-		[(ngModel)]="searchText"
-		*ngIf="notes.length > 5"
-		(input)="searchInput()"
+		type="text"
 	/>
 	<ng-container *ngIf="notes">
-		<div class="notes" *ngIf="viewNotes.length > 0; else zeroNotes">
+		<div *ngIf="viewNotes.length > 0; else zeroNotes" class="notes">
 			<div
-				class="note"
-				*ngFor="let note of viewNotes"
 				(click)="navigateToNote(note.id)"
+				*ngFor="let note of viewNotes"
+				class="note"
 			>
 				<div class="note__name">{{ note.name }}</div>
 				<div class="note__content">{{ note.content | stripHtmlTags }}</div>
-				<div class="note__tags" *ngIf="note.tags.length > 0">
+				<div *ngIf="note.tags.length > 0" class="note__tags">
 					<svg-tags width="15px"></svg-tags>
 					<span class="note__tag">
 						{{ note.tags[0].name }}
@@ -34,5 +34,5 @@
 		</div>
 	</ng-container>
 
-	<ng-template #zeroNotes> заметок нет </ng-template>
+	<ng-template #zeroNotes> заметок нет</ng-template>
 </div>

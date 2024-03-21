@@ -1,3 +1,17 @@
 custom-input {
 	flex: 1;
 }
+.buttons {
+	display: flex;
+	> button {
+		flex: 1;
+		padding: 5px 10px;
+
+		transition: all 0.45s ease;
+		background: inherit;
+		color: var(--color-modal-text);
+		&:hover {
+			background: var(--color-modal-text-background);
+		}
+	}
+}

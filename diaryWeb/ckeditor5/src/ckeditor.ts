@@ -7,16 +7,29 @@ import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
 import { Autosave } from '@ckeditor/ckeditor5-autosave';
-import { Bold, Code, Italic, Underline } from '@ckeditor/ckeditor5-basic-styles';
+import {
+	Bold,
+	Code,
+	Italic,
+	Underline,
+} from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { CodeBlock } from '@ckeditor/ckeditor5-code-block';
 import type { EditorConfig } from '@ckeditor/ckeditor5-core';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
+import {
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
+} from '@ckeditor/ckeditor5-font';
 import { Heading, Title } from '@ckeditor/ckeditor5-heading';
 import { Highlight } from '@ckeditor/ckeditor5-highlight';
 import { HorizontalLine } from '@ckeditor/ckeditor5-horizontal-line';
-import { DataFilter, GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
+import {
+	DataFilter,
+	GeneralHtmlSupport,
+} from '@ckeditor/ckeditor5-html-support';
 import {
 	Image,
 	ImageCaption,
@@ -24,7 +37,7 @@ import {
 	ImageResize,
 	ImageStyle,
 	ImageToolbar,
-	ImageUpload
+	ImageUpload,
 } from '@ckeditor/ckeditor5-image';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import { List, ListProperties, TodoList } from '@ckeditor/ckeditor5-list';
@@ -36,7 +49,7 @@ import {
 	TableCellProperties,
 	TableColumnResize,
 	TableProperties,
-	TableToolbar
+	TableToolbar,
 } from '@ckeditor/ckeditor5-table';
 import { Undo } from '@ckeditor/ckeditor5-undo';
 import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
@@ -88,7 +101,7 @@ class Editor extends ClassicEditor {
 		TodoList,
 		Underline,
 		Undo,
-		WordCount
+		WordCount,
 	];
 
 	public static override defaultConfig: EditorConfig = {
@@ -108,8 +121,8 @@ class Editor extends ClassicEditor {
 				'blockQuote',
 				'insertTable',
 				'undo',
-				'redo'
-			]
+				'redo',
+			],
 		},
 		language: 'ru',
 		image: {
@@ -118,8 +131,8 @@ class Editor extends ClassicEditor {
 				'toggleImageCaption',
 				'imageStyle:inline',
 				'imageStyle:block',
-				'imageStyle:side'
-			]
+				'imageStyle:side',
+			],
 		},
 		table: {
 			contentToolbar: [
@@ -127,9 +140,9 @@ class Editor extends ClassicEditor {
 				'tableRow',
 				'mergeTableCells',
 				'tableCellProperties',
-				'tableProperties'
-			]
-		}
+				'tableProperties',
+			],
+		},
 	};
 }
 
