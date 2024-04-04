@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Notes.Contracts\Notes.Contracts.csproj" />
+        <ProjectReference Include="..\Notes.Domain\Notes.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.1.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Note\Common\" />
+        <Folder Include="Tag\Common\" />
+        <Folder Include="User\Commands\" />
+        <Folder Include="User\Common\" />
+    </ItemGroup>
+</Project>

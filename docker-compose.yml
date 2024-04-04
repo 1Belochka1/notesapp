@@ -28,7 +28,7 @@
       - 4200:4200
     build:
       context: .
-      dockerfile: diaryWeb/Dockerfile
+      dockerfile: notesWeb/Dockerfile
 
 volumes:
   pddata:
