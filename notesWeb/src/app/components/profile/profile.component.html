@@ -25,11 +25,21 @@
 			[(ngModel)]="newPinCode"
 			(input)="validateNumericInput($event)"
 		/>
+		<span *ngIf="errorPinCode">{{ errorPinCode }}</span>
+		<button (click)="setPinCode()" *ngIf="!isPinCode">Установить</button>
 		<button
 			(click)="updatePinCode()"
+			*ngIf="isPinCode"
 			[disabled]="pinCode.length < 6 || (isPinCode && newPinCode.length < 6)"
 		>
-			{{ isPinCode ? "Обновить" : "Установить" }}
+			Обновить
+		</button>
+		<button
+			*ngIf="isPinCode"
+			(click)="deletePinCode()"
+			[disabled]="pinCode.length < 6"
+		>
+			Удалить пин-код
 		</button>
 	</div>
 </ng-container>
